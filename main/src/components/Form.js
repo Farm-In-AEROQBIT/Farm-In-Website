@@ -47,7 +47,7 @@ const Form = () => {
 
                 <div className='text-box-frame'>
                     <div className='icon-lock'></div>
-                    <input type="text" className='input-password' placeholder='비밀번호'
+                    <input type="password" className='input-password' placeholder='비밀번호'
                     value={inputPw} onChange={handleInputPw} onKeyDown={handleKeyDown}/>
                 </div>
 
