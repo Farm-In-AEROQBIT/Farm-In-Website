@@ -2,18 +2,17 @@ import React from "react";
 import './LinkSignIn.css';
 import {useNavigate} from 'react-router-dom';
 
-const linkSingIn = () => {
+const LinkSingIn = () => {
+
+    const navigate = useNavigate();
 
     const onClickLink = () => {
 
         console.log('clariS click!')
-        /*
-        const navigate = useNavigate();
-        navigate('/about');
-        */
+        navigate("/signup");
     }
 
-
+ 
     return(
         <main>
             <div className="question">
@@ -26,4 +25,4 @@ const linkSingIn = () => {
     ); 
 };
 
-export default linkSingIn;
+export default LinkSingIn;
