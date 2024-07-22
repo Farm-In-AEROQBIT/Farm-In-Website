@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import LogInFrame from './components/LogInFrame';
-import Form from './components/Form';
-import LinkSignIn from './components/LinkSignIn'; // 파일명 수정
+import LogInFrame from './components/LoginPage/LogInFrame';
+import Form from './components/LoginPage/Form';
+import LinkSignIn from './components/LoginPage/LinkSignIn'; // 파일명 수정
 
 class App extends Component {
   render() {

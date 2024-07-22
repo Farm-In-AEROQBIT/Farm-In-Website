@@ -82,17 +82,17 @@
 
 
 .icon-lock {
-    background-image: url("../images/lock.svg");
+    background-image: url("../../assets/images/Login/lock.svg");
     width:30px;
     height: 30px;
     background-size: contain;
     background-repeat: no-repeat;
     left: 1.2%;
     position: absolute;
-}
+} 
 
 .icon-id {
-    background-image: url("../images/id-badge.svg");
+    background-image: url("../../assets/images/Login/id-badge.svg");
     width: 35px;
     height: 35px;
     background-size: contain;
