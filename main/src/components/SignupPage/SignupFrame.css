@@ -4,6 +4,25 @@
     height: 450px;
     margin: 0 auto;
     position:absolute;
-    top: 40%;
+    top: 50%;
     left: 50%;
+    transform: translate(-50%, -60%);
+
+}
+
+.information-frame{
+    border : 1px dashed #000000;
+    width: 70%;
+    height: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@media (max-width: 765px) {
+    .sign-up-templete{
+        width: 95%;
+        padding: 10px;
+    }
 }

@@ -8,7 +8,7 @@ import Form from '../components/LoginPage/Form';
 const AppRoutes = () => {
     return (
         <Routes>
-            <Route path="/" element={<LogInFrame form={<Form />} link={<LinkSignIn />} />} /> {/* 시작 화면 설정 */}
+            <Route path="/" element={<LogInFrame form={<Form />} link={<LinkSignIn />} />} />
             <Route path="/login" element={<LogInFrame />} />
             <Route path="/signup" element={<SignupFrame />} />
         </Routes>
