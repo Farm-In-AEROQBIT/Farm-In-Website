@@ -1,12 +1,12 @@
 import React from "react";
 import './SignupFrame.css';
 
-const SignupFrame = () => {
+const SignupFrame = ({form}) => {
     return(
     <main>
         <section className='sign-up-templete'>
             <div className="information-form">
-                가운데 프레임
+                {form}
             </div>
             <div className="logo-text-box">
                 <div className="fram-in-logo"></div>

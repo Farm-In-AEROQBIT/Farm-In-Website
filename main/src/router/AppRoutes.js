@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import LogInFrame from '../components/LoginPage/LogInFrame';
 import SignupFrame from '../components/SignupPage/SignupFrame';
 import LinkSignIn from '../components/LoginPage/LinkSignIn';
-import Form from '../components/LoginPage/Form';
+import Form from '../components/LoginPage/Form'; 
 
 const AppRoutes = () => {
     return (
