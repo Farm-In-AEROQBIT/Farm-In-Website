@@ -1,0 +1,11 @@
+.box{
+    width: 400px;
+    height: 70px;
+    background-color: aquamarine;
+}
+
+.input-form{
+    position: absolute;
+    width: 80px;
+    height: 2px;
+}
