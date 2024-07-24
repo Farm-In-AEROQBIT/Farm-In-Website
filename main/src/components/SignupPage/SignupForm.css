@@ -4,6 +4,8 @@
     width: 44%;
     height: 38px;
     display: flex;
+    margin: 0;
+    padding: 0;
 }
 
 .icon-frame{
@@ -16,6 +18,14 @@
     justify-content: center;
 }
 
+
+.regist-id[type=text]{
+    position: relative;
+    width: 85%;
+    height: 90%;
+}
+
+
 .icon-id{
     background-image: url("../../assets/images/Signup/id-badge.svg");
     background-repeat: no-repeat;
@@ -24,10 +34,11 @@
 }
 
 
-.regist-id[type=text]{
-    position: relative;
-    width: 85%;
-    height: 90%;
+.icon-password{
+    background-image: url("../../assets/images/Signup/lock.svg");
+    background-repeat: no-repeat;
+    width: 80%;
+    height: 80%;
 }
 
 
