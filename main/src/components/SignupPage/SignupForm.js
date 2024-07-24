@@ -19,6 +19,7 @@ const SignupForm = () => {
                 <InputField placeholder="비밀번호" icon="icon-password" style={{bottom: 0, left: 0 }} />
                 <InputField placeholder="전화번호" icon="icon-phone-number" style={{bottom: 0, right: 0 }} />
             </div>
+            <div className="sign-in-btn">계정 생성</div>
         </main>
     );
 };
