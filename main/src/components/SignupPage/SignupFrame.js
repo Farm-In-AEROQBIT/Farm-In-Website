@@ -5,7 +5,7 @@ const SignupFrame = ({form}) => {
     return(
     <main>
         <section className='sign-up-templete'>
-            <div className="prototype"></div>
+            {/* <div className="prototype"></div> */}
                 <div className="information-form">
                     {form}
                 </div>

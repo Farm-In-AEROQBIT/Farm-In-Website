@@ -87,5 +87,10 @@
     color: #FFFFFF;
     font-size: 14px;
     font-weight: bold;
-    
+    left:50%;
+    transform: translate(-50%, 0%);
+}
+
+.sign-in-btn:hover{
+    background: #3cb3e2;
 }
