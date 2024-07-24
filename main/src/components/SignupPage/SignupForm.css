@@ -8,6 +8,16 @@
     padding: 0;
 }
 
+.information{
+    border: 1px dashed #000000;
+    position: absolute;
+    width: 100%;
+    height: 70%;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
 .icon-frame{
     border: 1px dashed #000000;
     position: relative;
@@ -19,26 +29,43 @@
 }
 
 
-.regist-id[type=text]{
+.regist[type=text]{
     position: relative;
-    width: 85%;
+    width: 83%;
     height: 90%;
 }
 
 
 .icon-id{
+    width: 100%;
+    height: 100%;
     background-image: url("../../assets/images/Signup/id-badge.svg");
     background-repeat: no-repeat;
-    width: 80%;
-    height: 80%;
+    background-size: contain;
 }
 
 
 .icon-password{
+    width: 85%;
+    height: 85%;    
     background-image: url("../../assets/images/Signup/lock.svg");
     background-repeat: no-repeat;
-    width: 80%;
-    height: 80%;
+    background-size: contain;
+
 }
 
+.icon-phone-number{
+    width: 80%;
+    height: 80%;    
+    background-image: url("../../assets/images/Signup/phone.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+}
 
+.icon-name{
+    width: 80%;
+    height: 80%;
+    background-image: url("../../assets/images/Signup/pen.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+}
