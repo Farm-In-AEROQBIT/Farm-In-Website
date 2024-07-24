@@ -1,11 +1,14 @@
 import React from "react";
 import './SignupFrame.css';
 
-const SignupFrame = ({form}) => {
+const SignupFrame = ({form, link}) => {
     return(
     <main>
         <section className='sign-up-templete'>
             {/* <div className="prototype"></div> */}
+                <div>
+                    {link}
+                </div>
                 <div className="information-form">
                     {form}
                 </div>
