@@ -15,7 +15,6 @@
     height: 100%;
     box-sizing: border-box;
     float: left;
-    box-sizing: border-box;
     background-image: url("../../assets/images/Login/background-growing.png");
     background-size: cover; /*대충 알아서 이미지 크기 맞춰주는 라인*/
     position: relative;
