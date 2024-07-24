@@ -49,7 +49,7 @@
     outline: none;
 }
 
-.input-password[type=password   ] {
+.input-password[type=password] {
     position: absolute;
     width: 83%;
     height: 87%;

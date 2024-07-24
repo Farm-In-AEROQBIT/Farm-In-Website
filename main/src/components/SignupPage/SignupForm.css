@@ -1,11 +1,33 @@
-.box{
-    width: 400px;
-    height: 70px;
-    background-color: aquamarine;
+.input-form{
+    border: 1px dashed #000000;
+    position: absolute;
+    width: 44%;
+    height: 38px;
+    display: flex;
 }
 
-.input-form{
-    position: absolute;
-    width: 80px;
-    height: 2px;
+.icon-frame{
+    border: 1px dashed #000000;
+    position: relative;
+    width: 30px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
+.icon-id{
+    background-image: url("../../assets/images/Signup/id-badge.svg");
+    background-repeat: no-repeat;
+    width: 80%;
+    height: 80%;
+}
+
+
+.regist-id[type=text]{
+    position: relative;
+    width: 85%;
+    height: 90%;
+}
+
+
