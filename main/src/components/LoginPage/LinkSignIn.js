@@ -7,7 +7,6 @@ const LinkSingIn = () => {
     const navigate = useNavigate();
 
     const onClickLink = () => {
-        console.log('clariS click!')
         navigate("/signup");
     }
 

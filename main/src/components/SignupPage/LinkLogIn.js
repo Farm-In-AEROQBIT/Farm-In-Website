@@ -7,7 +7,6 @@ const LinkLigIn = () => {
     const navigate = useNavigate();
 
     const onClickLink = () => {
-        console.log('clariS click!')
         navigate("/");
     }
 
