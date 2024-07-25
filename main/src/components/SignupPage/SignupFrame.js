@@ -14,10 +14,10 @@ const SignupFrame = ({form, link}) => {
                 </div>
                 <div className="logo-text-box">
                     <div className="frame-in-logo"></div>
-                    <div className="sign-up-text">
+                    <h1 className="sign-up-text">
                         <strong>팜인 </strong> 회원 가입하기
                         <div className="circle-point"></div>
-                    </div>
+                    </h1>
                 </div>
         </section>
     </main>
