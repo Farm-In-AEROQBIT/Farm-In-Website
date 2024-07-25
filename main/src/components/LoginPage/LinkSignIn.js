@@ -7,20 +7,19 @@ const LinkSingIn = () => {
     const navigate = useNavigate();
 
     const onClickLink = () => {
-
         console.log('clariS click!')
         navigate("/signup");
     }
 
-    
+
     return(
         <main>
             <div className="question">
                 아직 팜인 회원이 아니신가요?
             </div>
-            <div className="create-account" onClick={onClickLink}>
+            <button className="create-account" onClick={onClickLink}>
                 계정 만들기
-            </div>
+            </button>
         </main>
     ); 
 };
