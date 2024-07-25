@@ -11,7 +11,6 @@ const AppRoutes = () => {
     return (
         <Routes>
             <Route path="/" element={<LogInFrame form={<Form />} link={<LinkSignIn />} />} />
-            <Route path="/login" element={<LogInFrame />} />
             <Route path="/signup" element={<SignupFrame form={<SignupForm/>} link={<LinkLogIn/>}/>} />
         </Routes>
     );
