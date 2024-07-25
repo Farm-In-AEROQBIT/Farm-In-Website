@@ -24,18 +24,6 @@ const Form = () => {
         }
     }
 
-    
-
-    /*
-    useEffect(()=> {
-        axios.get('user_inform')
-        .then(res => console.log(res))
-        .catch()
-    }
-    ,[])
-    */
-
-
     return(
         <section>
             <div className='log-in-box'>
