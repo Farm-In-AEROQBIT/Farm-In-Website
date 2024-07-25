@@ -1,16 +1,6 @@
 import React, { useState } from "react";
 import './SignupForm.css';
 
-// const handleKeyDown = (e) => {
-//     if(e.key === 'Enter'){
-
-//     }
-// }
-
-// const onClickAccount = () => {
-//     console.log(inputId)
-// }s
-
 const SignupForm = () => {
 
     const [inputId, setInputId] =useState('');
@@ -23,6 +13,12 @@ const SignupForm = () => {
         console.log("what is love?");
     }
 
+    const handleKeyDown = (e) => {
+        if(e.key === 'Enter'){
+            onClickAccount();
+        }
+    }
+
 
     const InputField = ({ placeholder , icon, style}) => (
 
@@ -30,7 +26,8 @@ const SignupForm = () => {
             <div className="icon-frame">
                 <i className={icon}></i>
             </div>
-            <input type='text' className="regist" placeholder={placeholder}/>
+            <input type='text' className="regist" placeholder={placeholder}
+            onKeyDown={handleKeyDown}/>
         </fieldset>
     );
 
