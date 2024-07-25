@@ -61,6 +61,7 @@
 
 
 .log-in-btn {
+    border: 0;
     position: relative;
     width: 110px;
     height: 34px;

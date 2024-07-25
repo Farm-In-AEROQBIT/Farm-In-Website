@@ -52,9 +52,9 @@ const Form = () => {
                     value={inputPw} onChange={handleInputPw} onKeyDown={handleKeyDown}/>
                 </div>
 
-                <div className='log-in-btn' onClick={onClickLogin}>
+                <button className='log-in-btn' onClick={onClickLogin}>
                     로그인
-                </div>
+                </button>
             </div> 
         </section>
     );
