@@ -2,15 +2,12 @@ import React from "react";
 import './LinkSignIn.css';
 import {useNavigate} from 'react-router-dom';
 
-const linkSingIn = () => {
+const LinkSingIn = () => {
+
+    const navigate = useNavigate();
 
     const onClickLink = () => {
-
-        console.log('clariS click!')
-        /*
-        const navigate = useNavigate();
-        navigate('/about');
-        */
+        navigate("/signup");
     }
 
 
@@ -19,11 +16,11 @@ const linkSingIn = () => {
             <div className="question">
                 아직 팜인 회원이 아니신가요?
             </div>
-            <div className="create-account" onClick={onClickLink}>
+            <button className="create-account" onClick={onClickLink}>
                 계정 만들기
-            </div>
+            </button>
         </main>
     ); 
 };
 
-export default linkSingIn;
+export default LinkSingIn;
