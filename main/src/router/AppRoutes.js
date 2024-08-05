@@ -13,7 +13,7 @@ const AppRoutes = () => {
         <Routes>
             <Route path="/" element={<LogInFrame form={<Form />} link={<LinkSignIn />} />} />
             <Route path="/signup" element={<SignupFrame form={<SignupForm/>} link={<LinkLogIn/>}/>} />
-            <Route path="statistics" element={<StatisticsFrame/>}/>
+            <Route path="/statistics" element={<StatisticsFrame/>}/>
         </Routes>
     );
 };

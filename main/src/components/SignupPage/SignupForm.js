@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import './SignupForm.css';
+import { useNavigate } from "react-router-dom";
 
 
 // const InputField = ({ style, icon, placeholder, value, onChange, onKeyDown }) => (
@@ -49,6 +50,12 @@ const SignupForm = () => {
         if(e.key === 'Enter'){
             onClickAccount();
         }
+    }
+
+    const navigate = useNavigate();
+
+    const statisticsLink = () => {
+        navigate("/statistics");
     }
 
     // return (
@@ -111,7 +118,7 @@ const SignupForm = () => {
                 </fieldset>
 
             </div>
-            <button className="sign-in-btn" onClick={onClickAccount}>계정 생성</button>
+            <button className="sign-in-btn" onClick={statisticsLink}>계정 생성</button>
         </main>
     );
 
