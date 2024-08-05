@@ -86,6 +86,7 @@ const SignupForm = () => {
                         <input type='text' className="item regist" placeholder="비밀번호"
                             value={inputPw} onChange={handleInputPw} onKeyDown={handleKeyDown}></input>
                     </div>
+                    <p className="notice-text"> 하나 이상의 특수문자를 포함해주세요</p>
                 </fieldset>
 
                 <fieldset className="notice-frame" style={{top: 0, right:0}}>
@@ -106,6 +107,7 @@ const SignupForm = () => {
                         <input type='text' className="regist" placeholder="전화 번호"
                             value={inputNumber} onChange={handleInputNumber} onKeyDown={handleKeyDown}></input>
                     </div>
+                    <p className="notice-text"> 하이픈 (-)을 넣어서 작성해주세요</p>
                 </fieldset>
 
             </div>
