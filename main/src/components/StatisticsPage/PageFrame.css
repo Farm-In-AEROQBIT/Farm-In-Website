@@ -1,5 +1,10 @@
-.asdf{
-    width:125px;
-    length: 80px;
+.backgrond{
+    height: 120px;
     background-color: coral;
+}
+
+.header{
+    flex:0;
+    height: 80px;
+    background-color: #000000;
 }
