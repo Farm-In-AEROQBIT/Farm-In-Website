@@ -1,33 +1,16 @@
 import React from "react";
 import { useState, useEffect } from 'react';
 import './PageFrame.css';
-
-// const useScreenSize = () => {
-//     const []
-// }
+import useScreenSize from "./useScreenSize";
 
 
 
 const PageFrame = () => {
 
-    const [width, setWidth] = useState(window.innerWidth);
-
-
-    useEffect(() => {
-        const handleResize = () => {
-            setWidth(window.innerWidth);
-        };
-    
-        // Resize 이벤트 리스너 등록
-        window.addEventListener('resize', handleResize);
-    
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, []);
+    const screenSize = useScreenSize;
 
     return(
-        <main className="backgrond" style = {{width: width}}>
+        <main className="backgrond" style = {{width: screenSize.width}}>
             <div className="header"></div>
         </main>
     );
