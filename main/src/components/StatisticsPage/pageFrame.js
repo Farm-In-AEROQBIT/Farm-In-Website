@@ -10,17 +10,24 @@ const PageFrame = () => {
     const maxScreenSize = useMaxScreenSize();
 
     return (
-        <main>
-            <header className="header" style = {{width: screenSize.width}}>
+        <body>
+            <header className="header" style = {{width: screenSize.width, height: (maxScreenSize.height)*0.087}}>
                 <svg className="company-logo"></svg>
             </header>
-            <h2 className="profile-bar" style = {{height: (screenSize.height)*0.5}}></h2>
+            <h2 className="profile-bar" style = {{height: (maxScreenSize.height)*0.059}}>
+                <div className="buttons-frame" style = {{left: maxScreenSize.width*0.018, width: maxScreenSize.width*0.15}}>
+                    <button className="my-information-btn"> 내 정보 보기 </button>
+                    <button className="log-out-btn"> 로그아웃</button>
+                </div>
+            </h2>
+            
             <h1>Screen Size Detection with React Hook</h1>
             <p>Width: {screenSize.width}</p>
             <p>Height: {screenSize.height}</p>
             <p>maxwidth: {maxScreenSize.width}</p>
             <p>maxheight: {maxScreenSize.height}</p>
-        </main>
+
+        </body>
     );
 };
 
