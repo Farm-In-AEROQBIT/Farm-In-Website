@@ -23,7 +23,9 @@ const PageFrame = () => {
                     <div className="image-circle"></div>
                 </div>
             </h2>
-            
+            <section>
+                <image></image>
+            </section>
             <h1>Screen Size Detection with React Hook</h1>
             <p>Width: {screenSize.width}</p>
             <p>Height: {screenSize.height}</p>
