@@ -4,7 +4,24 @@
 }
 
 .header{
-    flex:0;
+    position: relative;
     height: 80px;
-    background-color: #000000;
+    background-color: #1C1C1C;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
+.company-logo{
+    background-image: URL('../../assets/images/Statistic/logo_white.svg');
+    height: 67%;
+    aspect-ratio: 70 / 23;
+    position: relative;
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+
+}
+
+
+

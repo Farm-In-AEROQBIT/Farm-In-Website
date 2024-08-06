@@ -10,10 +10,14 @@ const PageFrame = () => {
     const screenSize = useScreenSize;
 
     return(
-        <main className="backgrond" style = {{width: screenSize.width}}>
-            <div className="header"></div>
+        // <main className="backgrond" style = {{width: screenSize.width}}>
+        <main>
+            <header className="header">
+                <svg className="company-logo"></svg>
+            </header>
         </main>
     );
 }; 
-
+ 
 export default PageFrame;
+ 
