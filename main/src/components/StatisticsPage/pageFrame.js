@@ -19,6 +19,9 @@ const PageFrame = () => {
                     <button className="my-information-btn"> 내 정보 보기 </button>
                     <button className="log-out-btn"> 로그아웃</button>
                 </div>
+                <div className="profile-name-frame" style = {{right: maxScreenSize.width*0.018}}>
+                    <div className="image-circle"></div>
+                </div>
             </h2>
             
             <h1>Screen Size Detection with React Hook</h1>
