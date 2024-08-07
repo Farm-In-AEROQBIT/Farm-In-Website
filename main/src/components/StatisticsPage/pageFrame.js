@@ -17,10 +17,6 @@ const PageFrame = () => {
 
     return (
         <div>
-
-
-
-
             <header className="header">
                 <svg className="company-logo"></svg>
             </header>
@@ -29,21 +25,28 @@ const PageFrame = () => {
                     <button className="my-information-btn"> 내 정보 보기 </button>
                     <button className="log-out-btn"> 로그아웃</button>
                 </div>
-                <div className="profile-name-frame" style = {{right: maxScreenSize.width*0.018}}>
+                <div className="profile-name-frame" style = {{right: maxScreenSize.width*0.018}}>   
                     <div className="image-circle"></div>
                 </div>
             </h2>
-            {/* <section className="image-container" style ={{width: (maxScreenSize.width)*0.65, height: (maxScreenSize.height)*0.55}}>
-                <image className="header-image"></image>
+            <section className="image-container" >
+                <img className="header-image"></img>
 
-                <image className="overlay"></image>
-            </section> */}
+                <img className="overlay"></img>
+                <div className="link-slogan-container">
+                    <p className="slogan">환경과 공존하는 사업</p>
+                    <button className="link-homePage" img src = "">
+                        tonight vegas
+                    </button>
+                </div>
+            </section>
 
             {/* <h1>Screen Size Detection with React Hook</h1>
             <p>Width: {screenSize.width}</p>
             <p>Height: {screenSize.height}</p>
             <p>maxwidth: {maxScreenSize.width}</p>
-            <p>maxheight: {maxScreenSize.height}</p> */}
+            <p>maxheight: {maxScreenSize.height}</p>
+            <p>maxheight: {(maxScreenSize.width)*0.65}</p> */}
 
         </div>
     );
