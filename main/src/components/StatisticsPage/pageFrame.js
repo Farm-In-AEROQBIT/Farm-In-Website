@@ -16,6 +16,7 @@ const PageFrame = () => {
     }
 
     return (
+        
         <div>
             <header className="header">
                 <svg className="company-logo"></svg>
@@ -34,10 +35,11 @@ const PageFrame = () => {
 
                 <img className="overlay"></img>
                 <div className="link-slogan-container">
-                    <p className="slogan">환경과 공존하는 사업</p>
-                    <button className="link-homePage" img src = "">
+                    <p className="slogan">회사 슬로건</p>
+                    <p className="link-homePage">홈페이지 링크</p>
+                    {/* <button className="link-homePage" img src = "">
                         tonight vegas
-                    </button>
+                    </button> */}
                 </div>
             </section>
 

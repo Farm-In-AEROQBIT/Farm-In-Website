@@ -1,3 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@400;700&family=Nanum+Gothic:wght@400;700;800&family=Nanum+Pen+Script&display=swap');
+@font-face {
+    font-family: "nanum gothic light";
+    src: url("../../assets/fonts/나눔고딕L.woff") format('woff'), url("../../assets/fonts/나눔고딕L.ttf") format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 .backgrond{
     height: 250px;
     background-color: coral;
@@ -13,10 +21,11 @@
     height: 80px;
 }
 
+
 .company-logo{
     background-image: URL('../../assets/images/Statistic/logo_white.svg');
     height: 67%;
-    aspect-ratio: 70 / 23;
+    aspect-ratio: 3 / 1;
     position: relative;
     background-size: contain;
     background-repeat: no-repeat;
@@ -110,6 +119,10 @@
 }
 
 .link-slogan-container{
+    font-family: "Nanum Gothic", sans-serif;
+    font-weight: 700;
+    font-style: bold;
+
     position: absolute;
     border: 2px solid #77c6cc;
     width : 60%;
@@ -122,17 +135,20 @@
 .slogan{
     position: absolute;
     top: 0%;
-    font-size: 4vw;
-    color: #ffffff;
+    font-size: 5vw;
+    color: #1C1C1C;
     margin: 0;
 }
 
 .link-homePage{
+    font-family: "nanum gothic light", sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 3.2vw;
+    color: #ffffff;
     position:absolute;
     bottom: 0%;
-    width: 70%;
-    height: 35%;
-    background-color: rgba(50, 30, 50, 0.5);
+    margin: 0;
 }
 
 
@@ -142,6 +158,6 @@
     }
 
     .slogan{
-        font-size: 5.9vw;
+        font-size: 6.2vw;
     }
 }
