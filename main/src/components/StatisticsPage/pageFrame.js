@@ -35,7 +35,7 @@ const PageFrame = () => {
                     <img className="header-image"></img>
                     <img className="overlay"></img>
                     <div className="link-slogan-container">
-                        <p className="slogan">주식회사 팜인</p>
+                        <p className="slogan">휴머니즘이 살아있는<br/>환경 기술</p>
                         <div className="icon-link-box">
                             <p className="link-homePage">홈페이지 링크</p>
                             <img className="link-icon"></img>
@@ -52,7 +52,7 @@ const PageFrame = () => {
             <p>maxheight: {(maxScreenSize.width)*0.65}</p> */}
 
         </div>
-    );
+    ); 
 };
 
 export default PageFrame;
