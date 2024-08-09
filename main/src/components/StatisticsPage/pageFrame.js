@@ -30,18 +30,19 @@ const PageFrame = () => {
                     <div className="image-circle"></div>
                 </div>
             </h2>
-            <section className="image-container" >
-                <img className="header-image"></img>
-
-                <img className="overlay"></img>
-                <div className="link-slogan-container">
-                    <p className="slogan">회사 슬로건</p>
-                    <p className="link-homePage">홈페이지 링크</p>
-                    {/* <button className="link-homePage" img src = "">
-                        tonight vegas
-                    </button> */}
-                </div>
-            </section>
+            <body className="contents-container">
+                <section className="image-container" >
+                    <img className="header-image"></img>
+                    <img className="overlay"></img>
+                    <div className="link-slogan-container">
+                        <p className="slogan">주식회사 팜인</p>
+                        <div className="icon-link-box">
+                            <p className="link-homePage">홈페이지 링크</p>
+                            <img className="link-icon"></img>
+                        </div>
+                    </div>
+                </section>
+            </body>
 
             {/* <h1>Screen Size Detection with React Hook</h1>
             <p>Width: {screenSize.width}</p>
