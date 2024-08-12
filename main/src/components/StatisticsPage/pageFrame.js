@@ -31,7 +31,7 @@ const PageFrame = () => {
                 </div>
             </h2>
             <body className="contents-container">
-                <section className="image-container" >
+                <section className="image-container">
                     <img className="header-image"></img>
                     <img className="overlay"></img>
                     <div className="link-slogan-container">
@@ -42,6 +42,8 @@ const PageFrame = () => {
                         </div>
                     </div>
                 </section>
+                <hr className="upper-hr"/>
+                <div className="test"></div>
             </body>
 
             {/* <h1>Screen Size Detection with React Hook</h1>
