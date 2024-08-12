@@ -4,9 +4,10 @@ import './PageFrame.css';
 import useScreenSize from "./useScreenSize";
 import useMaxScreenSize from "./useMaxScreenSize";
 import {useNavigate} from 'react-router-dom';
+import useElementSize from './useElementSize';
 
 
-const PageFrame = () => {
+const PageFrame = ({statistic}) => {
     const screenSize = useScreenSize();
     const maxScreenSize = useMaxScreenSize();
     const navigate = useNavigate();
@@ -14,7 +15,7 @@ const PageFrame = () => {
     const onClick = () => {
         navigate("/");
     }
-
+    
     return (
         
         <div>
@@ -41,9 +42,9 @@ const PageFrame = () => {
                             <img className="link-icon"></img>
                         </div>
                     </div>
-                </section>
+                </section>  
                 <hr className="upper-hr"/>
-                <div className="test"></div>
+                {statistic}
             </body>
 
             {/* <h1>Screen Size Detection with React Hook</h1>

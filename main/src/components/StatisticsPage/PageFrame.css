@@ -98,6 +98,7 @@
     background-color: #EEEEEE;
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 
@@ -194,8 +195,8 @@
 
 .upper-hr{
     position: relative;
-    top: 70px;
     border : 0px;
+    margin: 7%;
     border-top: 1.5px solid #5E5E5E;
     width: 85%
 }
@@ -208,6 +209,7 @@
     background-color: #77c6cc;
 }
 
+
 @media(max-width:1248px){
     .contents-container{
         width: 100%;
@@ -217,4 +219,3 @@
         font-size: 6.2vw;
     }
 }
-
