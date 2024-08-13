@@ -16,7 +16,7 @@ const StatisticGraph = () => {
             <div className='statistic-grid'>
                 <section className='display-section'></section>
                 <section className='droplist-section'>
-                    <p className='period-text'>
+                    <p className='look-up-duration'>
                         <span className='Nanum-Gothic-bold'style={{fontSize: (bodySize.width/58)}}>김회원</span>
                         <span className='Nanum-Gothic'style={{fontSize: (bodySize.width/58)}}>님의 조회 가능 기간은&nbsp;</span>
                         <span className='Nanum-Gothic'style={{fontSize: (bodySize.width/58), }}>2024.01.11 ~ 2020.03.21</span>
