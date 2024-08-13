@@ -43,7 +43,7 @@ const PageFrame = ({statistic}) => {
                         </div>
                     </div>
                 </section>  
-                <hr className="upper-hr"/>
+                <hr className="top-hr"/>
                 {statistic}
             </body>
 

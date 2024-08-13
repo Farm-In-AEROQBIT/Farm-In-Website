@@ -14,8 +14,10 @@ const StatisticGraph = () => {
                 <span className="graph-title" style={{fontSize: (bodySize.width/25)}}>확인하기</span>
             </summary>
             <div className='display-section'>
+                <div className='grid-test'>1</div>
             </div> 
-        </main> 
+            {/* <hr className='bottom-hr'/> */}
+        </main>
         
     );
 };
