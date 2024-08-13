@@ -13,16 +13,24 @@ const StatisticGraph = () => {
                 <span className="Nanum-Gothic-bold" style={{fontSize: (bodySize.width/25)}}>공기 정보&nbsp;</span>
                 <span className="Nanum-Gothic-light" style={{fontSize: (bodySize.width/25)}}>확인하기</span>
             </summary>
-            <div className='display-section'>
-                <div className='grid'></div>
-                <div className='btn-section'>
+            <div className='statistic-grid'>
+                <section className='display-section'></section>
+                <section className='droplist-section'>
+                    <p className='period-text'>
+                        <span className='Nanum-Gothic-bold'style={{fontSize: (bodySize.width/58)}}>김회원</span>
+                        <span className='Nanum-Gothic'style={{fontSize: (bodySize.width/58)}}>님의 조회 가능 기간은&nbsp;</span>
+                        <span className='Nanum-Gothic'style={{fontSize: (bodySize.width/58), }}>2024.01.11 ~ 2020.03.21</span>
+                        <span className='Nanum-Gothic'style={{fontSize: (bodySize.width/58)}}>입니다</span>
+                    </p>
+                </section>
+                <section className='btn-section'>
                     <button className='inquiry-btn' style={{fontSize: (bodySize.width/50)}}>
                         정보 조회하기
                     </button>
                     <button className='export-btn'style={{fontSize: (bodySize.width/50)}}>
                         엑셀파일로 다운받기
                     </button>
-                </div>
+                </section>
             </div> 
             {/* <hr className='bottom-hr'/> */}
         </main>
