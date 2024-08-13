@@ -13,7 +13,6 @@ const StatisticGraph = () => {
                 <span className="graph-title-bold" style={{fontSize: (bodySize.width/25)}}>공기 정보&nbsp;</span>
                 <span className="graph-title" style={{fontSize: (bodySize.width/25)}}>확인하기</span>
             </summary>
-            <p>어디에 배치되지?</p>
             <div className='display-section'>
             </div> 
         </main> 

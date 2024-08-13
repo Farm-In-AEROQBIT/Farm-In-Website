@@ -44,8 +44,8 @@
 
 .display-section{
     width: 100%;
-    aspect-ratio: 21/11;
-    border:1px dotted #c2c2c2
+    aspect-ratio: 21/13;
+    border:1px dotted #c2c2c2;
 }
 
 .select-section{}
