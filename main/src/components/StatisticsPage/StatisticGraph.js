@@ -14,11 +14,14 @@ const StatisticGraph = () => {
                 <span className="Nanum-Gothic-light" style={{fontSize: (bodySize.width/25)}}>확인하기</span>
             </summary>
             <div className='display-section'>
-                <div className='grid-test'></div>
+                <div className='grid'></div>
                 <div className='btn-section'>
-                    <button className='inquiry-btn'>
+                    <button className='inquiry-btn' style={{fontSize: (bodySize.width/50)}}>
+                        정보 조회하기
                     </button>
-                    <button className='export-btn'></button>
+                    <button className='export-btn'style={{fontSize: (bodySize.width/50)}}>
+                        엑셀파일로 다운받기
+                    </button>
                 </div>
             </div> 
             {/* <hr className='bottom-hr'/> */}
