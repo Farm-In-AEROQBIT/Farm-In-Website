@@ -237,14 +237,35 @@
     background-repeat: no-repeat;
 }
 
-.company-name{
-    font-family: ;
-}
 
 .information-right{
 
 }
 
+.Nanum-Gothic-bold{
+    position: relative;
+    font-family: "Nanum Gothic", sans-serif;
+    font-weight: 700;
+    font-style: bold;
+    color: #1C1C1C;
+}
+
+.Nanum-Gothic-light{
+    position: relative;
+    font-family: "nanum gothic light", sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    color: #1C1C1C;
+}
+
+.Nanum-Gothic{
+    margin: 0%;
+    position: relative;
+    font-family: "Nanum Gothic", sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    color: #1C1C1C;
+}
 
 @media(max-width:1248px){
     .contents-container{
