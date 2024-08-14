@@ -15,6 +15,8 @@ const PageFrame = ({statistic}) => {
     const onClick = () => {
         navigate("/");
     }
+
+    const [ref, bodySize] = useElementSize();
     
     return (
         
@@ -46,6 +48,11 @@ const PageFrame = ({statistic}) => {
                 <hr className="top-hr"/>
                 {statistic}
             </body>
+            <footer className="footer-box">
+                <div className="information-left">
+                    <img className="footer-logo"></img>
+                </div>
+            </footer>
 
             {/* <h1>Screen Size Detection with React Hook</h1>
             <p>Width: {screenSize.width}</p>

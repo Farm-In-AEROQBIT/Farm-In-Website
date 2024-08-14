@@ -28,7 +28,6 @@
     position: relative;
     background-size: contain;
     background-repeat: no-repeat;
-    position: absolute;
 
 }
 
@@ -209,6 +208,43 @@
     background-color: #77c6cc;
 }
 
+.footer-box{
+    position: absolute;
+    width: 95%;
+    aspect-ratio: 15/2;
+    background-color: #1C1C1C;
+    left: 50%;
+    transform: translate(-50%);
+    display: flex;
+    align-items: center;
+
+}
+
+.information-left{
+    position: relative;
+    height: 60%;
+    width:fit-content;
+    border: 1px dashed salmon;
+    margin-left: 3%;
+}
+
+.footer-logo{
+    background-image: URL('../../assets/images/Statistic/logo_white.svg');
+    height: 28%;
+    aspect-ratio: 3 / 1;
+    position: relative;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.company-name{
+    font-family: ;
+}
+
+.information-right{
+
+}
+
 
 @media(max-width:1248px){
     .contents-container{
@@ -217,5 +253,10 @@
 
     .slogan{
         font-size: 6.2vw;
+    }
+
+    .footer-box{
+        width: 95%;
+        aspect-ratio: 115/27;
     }
 }
