@@ -222,7 +222,7 @@
 
 .information-left{
     position: relative;
-    height: 60%;
+    height: 53%;
     width:fit-content;
     border: 1px dashed salmon;
     margin-left: 3%;
@@ -230,7 +230,7 @@
 
 .footer-logo{
     background-image: URL('../../assets/images/Statistic/logo_white.svg');
-    height: 28%;
+    height: 33%;
     aspect-ratio: 3 / 1;
     position: relative;
     background-size: contain;
@@ -239,18 +239,20 @@
 
 
 .information-right{
-
+    
 }
 
-.Nanum-Gothic-bold{
+.Nanum-bold{
     position: relative;
     font-family: "Nanum Gothic", sans-serif;
     font-weight: 700;
     font-style: bold;
     color: #1C1C1C;
+    margin: 0%;
 }
 
-.Nanum-Gothic-light{
+
+.Nanum-light{
     position: relative;
     font-family: "nanum gothic light", sans-serif;
     font-weight: normal;
@@ -258,13 +260,23 @@
     color: #1C1C1C;
 }
 
-.Nanum-Gothic{
+.Nanum{
     margin: 0%;
     position: relative;
     font-family: "Nanum Gothic", sans-serif;
     font-weight: normal;
     font-style: normal;
     color: #1C1C1C;
+}
+
+.company-name{
+    color:#7E99AE;
+    margin-top: 5%;
+}
+
+.address{
+    color:#FFFFFF;
+    margin-top: 5%;
 }
 
 @media(max-width:1248px){

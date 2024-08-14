@@ -33,7 +33,7 @@ const PageFrame = ({statistic}) => {
                     <div className="image-circle"></div>
                 </div>
             </h2>
-            <body className="contents-container">
+            <body className="contents-container" ref={ref}>
                 <section className="image-container">
                     <img className="header-image"></img>
                     <img className="overlay"></img>
@@ -51,6 +51,8 @@ const PageFrame = ({statistic}) => {
             <footer className="footer-box">
                 <div className="information-left">
                     <img className="footer-logo"></img>
+                    <p class="Nanum-bold company-name" style={{fontSize: (bodySize.width/62)}}>주식회사 팜인</p>
+                    <p class="Nanum address" style={{fontSize: (bodySize.width/80)}}>대전광역시 유성구 테크노 9로 35 IT 벤처타운 407호 (우:34027)</p>
                 </div>
             </footer>
 
