@@ -122,6 +122,21 @@
     bottom: 20%;
 }
 
+.icon-frame{
+    position: relative;
+    height: 70%;
+    aspect-ratio: 1/1;
+    border: 1px dashed salmon;
+}
+
+.icon-magnfier{
+    height: 100%;
+    width: 100%;
+    background-image: url('../../assets/images/Statistic/magnifier.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
 
 .bottom-hr{
     position: absolute;

@@ -30,7 +30,10 @@ const StatisticGraph = () => {
                         정보 조회하기
                     </button>
                     <button className='export-btn'style={{fontSize: (bodySize.width/50)}}>
-                        엑셀파일로 다운받기
+                        <div>
+                            <span>엑셀파일로 다운받기</span>
+                            <div className='icon-frame'></div>
+                        </div>
                     </button>
                 </section>
             </div> 
