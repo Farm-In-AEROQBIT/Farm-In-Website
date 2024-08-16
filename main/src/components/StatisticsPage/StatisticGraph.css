@@ -107,6 +107,9 @@
     transform: translate(-50%, -50%);
     left: 50%;
     top: 42%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .export-btn{
@@ -120,19 +123,31 @@
     transform: translate(-50%, -50%);
     left: 50%;
     bottom: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .icon-frame{
     position: relative;
-    height: 70%;
+    height: 50%;
+    width: 12%;
+    /* border: 1px dashed salmon; */
+}
+.icon-magnfier{
+    position: relative;
+    height: 100%;
     aspect-ratio: 1/1;
-    border: 1px dashed salmon;
+    background-image: url('../../assets/images/Statistic/magnifier.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
-.icon-magnfier{
+.icon-csv{
+    position: relative;
     height: 100%;
-    width: 100%;
-    background-image: url('../../assets/images/Statistic/magnifier.svg');
+    aspect-ratio: 1/1;
+    background-image: url('../../assets/images/Statistic/csv-file.svg');
     background-size: contain;
     background-repeat: no-repeat;
 }

@@ -27,12 +27,15 @@ const StatisticGraph = () => {
                 </section>
                 <section className='btn-section'>
                     <button className='inquiry-btn' style={{fontSize: (bodySize.width/50)}}>
-                        정보 조회하기
+                        <span>정보 조회하기</span>
+                        <div className='icon-frame'>
+                            <div className='icon-magnfier'></div>
+                        </div>
                     </button>
                     <button className='export-btn'style={{fontSize: (bodySize.width/50)}}>
-                        <div>
-                            <span>엑셀파일로 다운받기</span>
-                            <div className='icon-frame'></div>
+                        <span>엑셀파일로 다운받기</span>
+                        <div className='icon-frame'>
+                            <div className='icon-csv'></div>
                         </div>
                     </button>
                 </section>
