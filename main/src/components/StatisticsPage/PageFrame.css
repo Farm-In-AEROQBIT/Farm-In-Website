@@ -167,7 +167,7 @@
 }
 
 .icon-link-box{
-    border: 1px dashed #000000;
+    border: 1px dashed salmon;
     position: absolute;
     bottom: 0%;
     height: 30%;
@@ -212,7 +212,7 @@
     top:90px;
     width:100%;
     height: 160px;
-    background-color: #77c6cc;
+    background-color: salmon;
 }
 
 .footer-box{
@@ -243,9 +243,16 @@
     border: 1px dashed salmon;
     margin-right: 3%;
     display: grid;
-    
+    grid-template-rows: 1.5fr 1fr 1fr 1fr;
+    text-align: right;
 }
 
+.information{
+    height: fit-content;
+    right: 0%;
+    margin: 0%;
+    text-align: right;
+}
 
 .footer-logo{
     background-image: URL('../../assets/images/Statistic/logo_white.svg');

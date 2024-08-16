@@ -14,12 +14,14 @@ const StatisticGraph = () => {
                 <span className="Nanum-Gothic-light" style={{fontSize: (bodySize.width/25)}}>확인하기</span>
             </summary>
             <div className='statistic-grid'>
-                <section className='display-section'></section>
+                <section className='display-section'>
+                    <hr className='bottom-hr'/>
+                </section>
                 <section className='droplist-section'>
                     <p className='look-up-duration'>
                         <span className='Nanum-Gothic-bold'style={{fontSize: (bodySize.width/58)}}>김회원</span>
                         <span className='Nanum-Gothic'style={{fontSize: (bodySize.width/58)}}>님의 조회 가능 기간은&nbsp;</span>
-                        <span className='duration-text'style={{fontSize: (bodySize.width/58), }}>2024.01.11 ~ 2020.03.21</span>
+                        <span className='duration-text'style={{fontSize: (bodySize.width/58)}}>2024.01.11 ~ 2020.03.21</span>
                         <span className='Nanum-Gothic'style={{fontSize: (bodySize.width/58)}}>입니다</span>
                     </p>
                 </section>
@@ -32,7 +34,6 @@ const StatisticGraph = () => {
                     </button>
                 </section>
             </div> 
-            {/* <hr className='bottom-hr'/> */}
         </main>
         
     );

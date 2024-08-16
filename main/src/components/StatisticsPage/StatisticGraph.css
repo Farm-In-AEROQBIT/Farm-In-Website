@@ -7,7 +7,7 @@
 }
 
 .graph-container{
-    border: 1px solid #F26009;
+    border: 1px solid salmon;
     width:100%;
     aspect-ratio: 8/10;
     display: flex;
@@ -18,7 +18,7 @@
 .title-box{
     width:43%;
     height: fit-content;
-    border: 1px dashed #F26009;
+    border: 1px dashed salmon;
     text-align: center;
 }
 
@@ -51,14 +51,14 @@
     display: grid;
     width: 100%;
     height: 78%;
-    border: 2px dotted #AD86DE;
+    border: 2px dotted salmon;
     grid-template-columns: 3fr 2fr;
     grid-template-rows: 148fr 91fr;
 }
 
 .display-section{
     position: relative;
-    border: 2px solid #21B59E;
+    /* border: 1px solid salmon; */
     grid-column: 1/3;
     grid-row: 1;
 }
@@ -74,7 +74,7 @@
 .look-up-duration{
     width:80%;
     height:6%;
-    border: 1px dashed #FF6B46;
+    border: 1px dashed salmon;
     padding: margin;
 }
 
@@ -90,9 +90,10 @@
 
 .btn-section{
     position: relative;
-    border: 2px solid #21B59E;
+    /* border: 1px solid salmon; */
     grid-column: 2/3;
     grid-row: 2;
+    border-left: 1.5px solid #5E5E5E;
 }
 
 .inquiry-btn{
@@ -123,10 +124,13 @@
 
 
 .bottom-hr{
-    position: relative;
+    position: absolute;
+    bottom: 0%;
     border : 0px;
     margin: 0;
     border-top: 1.5px solid #5E5E5E;
-    width: 90%
+    width: 90%;
+    left: 50%;
+    transform: translate(-50%, 0);
 }
 

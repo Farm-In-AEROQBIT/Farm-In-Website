@@ -55,19 +55,19 @@ const PageFrame = ({statistic}) => {
                     <p class="Nanum contact-way" style={{fontSize: (bodySize.width/80)}}>대전광역시 유성구 테크노 9로 35 IT 벤처타운 407호 (우:34027)</p>
                 </div>
                 <div className="information-right">
-                    <p className= "Nanum-bold contact" style={{fontSize: (bodySize.width/61)}}>CONTACT US</p>
-                    <div>
+                    <p className= "Nanum-bold contact " style={{fontSize: (bodySize.width/61)}}>CONTACT US</p>
+                    <p className="information">
                         <span className="Nanum-bold contact-way" style={{fontSize: (bodySize.width/71)}}>TEL</span>
                         <span className="Nanum contact-way" style={{fontSize: (bodySize.width/71)}}>&nbsp;&nbsp;042-880-5905</span>
-                    </div>
-                    <div>
+                    </p>
+                    <p className="information">
                         <span className="Nanum-bold contact-way" style={{fontSize: (bodySize.width/71)}}>FAX</span>
                         <span className="Nanum contact-way" style={{fontSize: (bodySize.width/71)}}>&nbsp;&nbsp;0508-958-1530</span>
-                    </div>
-                    <div>
+                    </p>
+                    <p className="information">
                         <span className="Nanum-bold contact-way" style={{fontSize: (bodySize.width/71)}}>E-MAIL</span>
                         <span className="Nanum contact-way" style={{fontSize: (bodySize.width/71)}}>&nbsp;&nbsp;farmin0130@farm-in.kr</span>
-                    </div>
+                    </p>
                 </div>
             </footer>
 
