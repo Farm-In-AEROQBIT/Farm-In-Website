@@ -2,7 +2,7 @@ import useElementSize from './useElementSize';
 import './StatisticGraph.css';
 
 
-const StatisticGraph = () => {
+const StatisticGraph = ({dataVisualization}) => {
     const [ref, bodySize] = useElementSize();
     return(
         <main className="graph-container" ref={ref}>
@@ -15,6 +15,7 @@ const StatisticGraph = () => {
             </summary>
             <div className='statistic-grid'>
                 <section className='display-section'>
+                    {dataVisualization}
                     <hr className='bottom-hr'/>
                 </section>
                 <section className='droplist-section'>
@@ -28,13 +29,13 @@ const StatisticGraph = () => {
                 <section className='btn-section'>
                     <button className='inquiry-btn' style={{fontSize: (bodySize.width/50)}}>
                         <span>정보 조회하기</span>
-                        <div className='icon-frame'>
+                        <div className='icon-container'>
                             <div className='icon-magnfier'></div>
                         </div>
                     </button>
                     <button className='export-btn'style={{fontSize: (bodySize.width/50)}}>
                         <span>엑셀파일로 다운받기</span>
-                        <div className='icon-frame'>
+                        <div className='icon-container'>
                             <div className='icon-csv'></div>
                         </div>
                     </button>

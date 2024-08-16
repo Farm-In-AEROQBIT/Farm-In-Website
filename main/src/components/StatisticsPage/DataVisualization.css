@@ -1,0 +1,13 @@
+.component-chart-grid{
+    position: absolute;
+    width:85%;
+    height:100%;
+    /* aspect-ratio: 1/0.7; */
+    border: 1px dashed salmon;
+    left: 50%;
+    transform: translate(-50%, 0%);
+
+    display: grid;
+    grid-template-columns: 1fr 21fr 1fr;
+    grid-template-rows: 5fr 44fr 10fr;
+}

@@ -128,28 +128,30 @@
     justify-content: center;
 }
 
-.icon-frame{
+.icon-container{
     position: relative;
     height: 50%;
-    width: 12%;
-    /* border: 1px dashed salmon; */
+    width: 11%;
+    /*   */
 }
 .icon-magnfier{
-    position: relative;
+    position: absolute;
     height: 100%;
     aspect-ratio: 1/1;
     background-image: url('../../assets/images/Statistic/magnifier.svg');
     background-size: contain;
     background-repeat: no-repeat;
+    right: 0;
 }
 
 .icon-csv{
-    position: relative;
+    position: absolute;
     height: 100%;
     aspect-ratio: 1/1;
     background-image: url('../../assets/images/Statistic/csv-file.svg');
     background-size: contain;
     background-repeat: no-repeat;
+    right: 0;
 }
 
 
