@@ -8,7 +8,7 @@ const LogInFrame = ({ form, link }) => {
         <div className='logo-box'>
           <div className='svg-logo'></div>
           <p className='image-text'>
-            무언가 그럴듯 한 소개 슬로건 한줄
+            휴머니즘이 살아있는 환경 기술
           </p>
         </div>
       </section>

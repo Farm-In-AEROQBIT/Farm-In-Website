@@ -1,0 +1,168 @@
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@400;700&family=Nanum+Gothic:wght@400;700;800&family=Nanum+Pen+Script&display=swap');
+@font-face {
+    font-family: "nanum gothic light";
+    src: url("../../assets/fonts/나눔고딕L.woff") format('woff'), url("../../assets/fonts/나눔고딕L.ttf") format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.graph-container{
+    border: 1px solid salmon;
+    width:100%;
+    aspect-ratio: 8/10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title-box{
+    width:43%;
+    height: fit-content;
+    border: 1px dashed salmon;
+    text-align: center;
+}
+
+.Nanum-Gothic-bold{
+    position: relative;
+    font-family: "Nanum Gothic", sans-serif;
+    font-weight: 700;
+    font-style: bold;
+    color: #1C1C1C;
+}
+
+.Nanum-Gothic-light{
+    position: relative;
+    font-family: "nanum gothic light", sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    color: #1C1C1C;
+}
+
+.Nanum-Gothic{
+    margin: 0%;
+    position: relative;
+    font-family: "Nanum Gothic", sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    color: #1C1C1C;
+}
+
+.statistic-grid{
+    display: grid;
+    width: 100%;
+    height: 78%;
+    border: 2px dotted salmon;
+    grid-template-columns: 3fr 2fr;
+    grid-template-rows: 148fr 91fr;
+}
+
+.display-section{
+    position: relative;
+    /* border: 1px solid salmon; */
+    grid-column: 1/3;
+    grid-row: 1;
+}
+
+.droplist-section{
+    position: relative;
+    grid-column: 1/2;
+    grid-row: 2;
+    display: flex;
+    justify-content: center;
+}
+
+.look-up-duration{
+    width:80%;
+    height:6%;
+    border: 1px dashed salmon;
+    padding: margin;
+}
+
+.duration-text{
+    margin: 0%;
+    position: relative;
+    font-family: "Nanum Gothic", sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    color: #1C1C1C;
+    background: linear-gradient(to top, #66EDFF 40%, transparent 40%);
+}
+
+.btn-section{
+    position: relative;
+    /* border: 1px solid salmon; */
+    grid-column: 2/3;
+    grid-row: 2;
+    border-left: 1.5px solid #5E5E5E;
+}
+
+.inquiry-btn{
+    position: absolute;
+    width: 68%;
+    height: 13%;
+    border: none;
+    border-radius: 500px;
+    background-color: #74A8B9;
+    color: #354755;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 42%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.export-btn{
+    position: absolute;
+    width: 68%;
+    height: 13%;
+    border: none;
+    border-radius: 500px;
+    background-color: #354755;
+    color: #74A8B9;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    bottom: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-container{
+    position: relative;
+    height: 50%;
+    width: 11%;
+    /*   */
+}
+.icon-magnfier{
+    position: absolute;
+    height: 100%;
+    aspect-ratio: 1/1;
+    background-image: url('../../assets/images/Statistic/magnifier.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    right: 0;
+}
+
+.icon-csv{
+    position: absolute;
+    height: 100%;
+    aspect-ratio: 1/1;
+    background-image: url('../../assets/images/Statistic/csv-file.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    right: 0;
+}
+
+
+.bottom-hr{
+    position: absolute;
+    bottom: 0%;
+    border : 0px;
+    margin: 0;
+    border-top: 1.5px solid #5E5E5E;
+    width: 90%;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
