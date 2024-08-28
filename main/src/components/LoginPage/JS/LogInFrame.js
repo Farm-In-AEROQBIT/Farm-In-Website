@@ -1,5 +1,5 @@
 import React from 'react';
-import './LogInFrame.css';
+import '../CSS/LogInFrame.css';
 
 const LogInFrame = ({ form, link }) => {
   return (

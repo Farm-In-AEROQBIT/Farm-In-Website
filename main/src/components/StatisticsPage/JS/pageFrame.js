@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from 'react';
-import './PageFrame.css';
+import '../CSS/PageFrame.css';
 import useScreenSize from "./useScreenSize";
 import useMaxScreenSize from "./useMaxScreenSize";
 import {useNavigate} from 'react-router-dom';

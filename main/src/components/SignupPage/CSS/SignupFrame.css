@@ -47,7 +47,7 @@
 }  
 
 .frame-in-logo{
-    background-image: url("../../assets/images/Signup/logo_gray.svg");
+    background-image: url("../../../assets/images/Signup/logo_gray.svg");
     background-size: contain;
     background-repeat: no-repeat;
     width: 95%;
@@ -72,7 +72,7 @@
 }
 
 .circle-point{
-    background-image: url("../../assets/images/Signup/circle.svg");
+    background-image: url("../../../assets/images/Signup/circle.svg");
     width:13px;
     height:13px;
     position: absolute;
@@ -87,7 +87,7 @@
     width: 100%;
     height: 100%;
     z-index: 99;
-    background-image: url("../../assets/images/Signup/sign_in_prototype.png");
+    background-image: url("../../../assets/images/Signup/sign_in_prototype.png");
     background-size: cover;
     opacity: 38%;
 }
