@@ -1,14 +1,14 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import LogInFrame from '../components/LoginPage/LogInFrame';
-import SignupFrame from '../components/SignupPage/SignupFrame';
-import LinkSignIn from '../components/LoginPage/LinkSignIn';
-import Form from '../components/LoginPage/Form';
-import SignupForm from '../components/SignupPage/SignupForm';
-import LinkLogIn from '../components/SignupPage/LinkLogIn';
-import StatisticsFrame from '../components/StatisticsPage/pageFrame';
-import StatisticGraph from '../components/StatisticsPage/StatisticGraph';
-import DataVisualization from '../components/StatisticsPage/DataVisualization';
+import LogInFrame from '../components/JS/LoginPage/LogInFrame';
+import SignupFrame from '../components/JS/SignupPage/SignupFrame';
+import LinkSignIn from '../components/JS/LoginPage/LinkSignIn';
+import Form from '../components/JS/LoginPage/Form';
+import SignupForm from '../components/JS/SignupPage/SignupForm';
+import LinkLogIn from '../components/JS/SignupPage/LinkLogIn';
+import StatisticsFrame from '../components/JS/StatisticsPage/pageFrame';
+import StatisticGraph from '../components/JS/StatisticsPage/StatisticGraph';
+import DataVisualization from '../components/JS/StatisticsPage/DataVisualization';
 
 const AppRoutes = () => {
     return (

@@ -1,5 +1,5 @@
 import useElementSize from './useElementSize';
-import './StatisticGraph.css';
+import '../CSS/StatisticGraph.css';
 
 
 const StatisticGraph = ({dataVisualization}) => {
