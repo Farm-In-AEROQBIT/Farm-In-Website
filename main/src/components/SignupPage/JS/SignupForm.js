@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import './SignupForm.css';
+import '../CSS/SignupForm.css';
 import { useNavigate } from "react-router-dom";
 
 
@@ -124,9 +124,5 @@ const SignupForm = () => {
 
 
 };
-
-
-
-
 
 export default SignupForm;

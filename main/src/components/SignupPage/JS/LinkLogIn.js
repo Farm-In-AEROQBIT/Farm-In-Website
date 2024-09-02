@@ -1,5 +1,5 @@
 import React from "react";
-import './LinkLogIn.css';
+import '../CSS/LinkLogIn.css';
 import {useNavigate} from 'react-router-dom';
 
 const LinkLigIn = () => {
