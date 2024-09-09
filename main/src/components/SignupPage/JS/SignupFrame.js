@@ -1,5 +1,5 @@
 import React from "react";
-import './SignupFrame.css';
+import '../CSS/SignupFrame.css';
 
 const SignupFrame = ({form, link}) => {
     return(

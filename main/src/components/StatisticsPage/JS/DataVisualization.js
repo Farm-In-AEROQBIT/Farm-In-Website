@@ -1,5 +1,5 @@
 import useElementSize from './useElementSize';
-import './DataVisualization.css';
+import '../CSS/DataVisualization.css';
 import { useState, useEffect } from 'react';
 
 const DataVisualization = () => {

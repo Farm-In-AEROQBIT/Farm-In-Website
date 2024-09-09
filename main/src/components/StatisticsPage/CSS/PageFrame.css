@@ -188,7 +188,7 @@
 
 .link-icon {
     position: relative;
-    background-image: url(../../assets/images/Statistic/external-link.svg);
+    background-image: url(../../../assets/images/Statistic/external-link.svg);
     height: 50%; /* 부모 요소에 따라 결정 */
     aspect-ratio: 1/1;
     background-size: contain;
