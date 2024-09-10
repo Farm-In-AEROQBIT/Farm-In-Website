@@ -1,13 +1,12 @@
 import useElementSize from './useElementSize';
 import '../CSS/DataVisualization.css';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import LineGraph from './LineGraph'; // LineGraph 컴포넌트 임포트
 
 const DataVisualization = () => {
-
     const [selectedButton, setSelectedButton] = useState('');
 
     const handleButtonClick = (index) => {
-        // 클릭된 버튼의 인덱스를 상태에 저장
         setSelectedButton(index);
     };
 
@@ -18,7 +17,10 @@ const DataVisualization = () => {
     const [week, setWeek] = useState(2);
     const [ingredient, setIngredient] = useState('이산화탄소');
 
-    return(
+    // 선택된 버튼에 따라 period 값을 설정
+    const period = buttons[selectedButton] || '월별 통계';
+
+    return (
         <div>
             <div className='component-chart-grid' ref={ref}>
                 <section className='upper-section'>
@@ -38,14 +40,14 @@ const DataVisualization = () => {
                                 onClick={() => handleButtonClick(index)}
                             >
                                 {button}
-                        </button>
+                            </button>
                         ))} 
                     </div>
                     <hr className='graph-hr'/>
                 </section>
 
-
                 <section className='middle-section'>
+                    <LineGraph ingredient={ingredient} period={period} /> {/* LineGraph 컴포넌트 사용 */}
                 </section>
             </div>
         </div>
