@@ -1,3 +1,4 @@
+// useElementSize.js
 import { useState, useEffect, useRef } from 'react';
 
 const useElementSize = () => {
@@ -17,16 +18,13 @@ const useElementSize = () => {
       }
     };
 
-    // Initial size
     handleResize();
 
-    // Resize observer to watch for size changes
     const resizeObserver = new ResizeObserver(handleResize);
     if (ref.current) {
       resizeObserver.observe(ref.current);
     }
 
-    // Clean up the observer when the component unmounts
     return () => {
       if (ref.current) {
         resizeObserver.unobserve(ref.current);

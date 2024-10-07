@@ -1,6 +1,7 @@
 import useElementSize from './useElementSize';
 import '../CSS/DataVisualization.css';
 import { useState, useEffect } from 'react';
+import LineGraph from './LineGraph';
 
 const DataVisualization = () => {
 
@@ -14,7 +15,7 @@ const DataVisualization = () => {
     const [ref, bodySize] = useElementSize();
 
     const buttons = ['연도 통계', '월별 통계', '주간 통계', '하루 통계'];
-    const [month, setMonth] = useState(7);
+    const [month, setMonth] = useState(10);
     const [week, setWeek] = useState(2);
     const [ingredient, setIngredient] = useState('이산화탄소');
 
@@ -27,7 +28,7 @@ const DataVisualization = () => {
                         <span style={{fontSize: bodySize.width*0.02}} className='ascii-test'>월&nbsp;</span>
                         <span style={{fontSize: bodySize.width*0.02}} className='numeric-text'>{week}</span>
                         <span style={{fontSize: bodySize.width*0.02}} className='ascii-test'>주차의&nbsp;</span>
-                        <span style={{fontSize: bodySize.width*0.02}} className='ascii-test'>{ingredient}</span>
+                        <span style={{fontSize: bodySize.width*0.02}} className='ascii-test'>{ingredient}의 측정값입니다.&nbsp;</span>
                     </p>
                     <div className='btn-container'>
                         {buttons.map((button, index) => (
@@ -43,9 +44,8 @@ const DataVisualization = () => {
                     </div>
                     <hr className='graph-hr'/>
                 </section>
-
-
                 <section className='middle-section'>
+                    <LineGraph />  {}
                 </section>
             </div>
         </div>
