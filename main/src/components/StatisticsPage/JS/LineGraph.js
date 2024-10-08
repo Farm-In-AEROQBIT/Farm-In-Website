@@ -8,9 +8,9 @@ import {
   LineElement,
   Title,
   Tooltip,
-  Legend
 } from 'chart.js';
 import useElementSize from './useElementSize';
+import axios from 'axios';  // axios 설치 필요: npm install axios
 
 ChartJS.register(
   CategoryScale,
@@ -19,35 +19,47 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip,
-  Legend
 );
 
 const LineGraph = () => {
     const [ref, size] = useElementSize();
     const [chartData, setChartData] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-    // 차트 데이터 설정
+    // 서버에서 데이터 가져오기
     useEffect(() => {
-        const data = {
-            labels: [
-                '1월', '2월', '3월', '4월', '5월', '6월', 
-                '7월', '8월', '9월', '10월', '11월', '12월'
-            ],
-            datasets: [
-                {
-                    label: '측정값',
-                    data: [65, 59, 80, 81, 56, 55, 40, 45, 60, 70, 75, 80],
-                    fill: false,
-                    borderColor: 'rgb(75, 192, 192)',
-                    tension: 0.1,
-                    pointBackgroundColor: 'rgb(75, 192, 192)',
-                    pointBorderColor: '#fff',
-                    pointHoverBackgroundColor: '#fff',
-                    pointHoverBorderColor: 'rgb(75, 192, 192)'
-                }
-            ]
+        const fetchData = async () => {
+            try {
+                setLoading(true);
+                const response = await axios.get('YOUR_API_ENDPOINT');  // API 엔드포인트 변경 필요
+                
+                // 서버 응답 데이터 포맷 변환
+                const formattedData = {
+                    labels: response.data.map(item => `${item.month}월`),
+                    datasets: [
+                        {
+                            data: response.data.map(item => item.value),
+                            fill: false,
+                            borderColor: 'rgb(75, 192, 192)',
+                            tension: 0.1,
+                            pointBackgroundColor: 'rgb(75, 192, 192)',
+                            pointBorderColor: '#fff',
+                            pointHoverBackgroundColor: '#fff',
+                            pointHoverBorderColor: 'rgb(75, 192, 192)'
+                        }
+                    ]
+                };
+                
+                setChartData(formattedData);
+                setLoading(false);
+            } catch (err) {
+                setError(err.message);
+                setLoading(false);
+            }
         };
-        setChartData(data);
+
+        fetchData();
     }, []);
 
     // 차트 옵션 설정
@@ -56,21 +68,17 @@ const LineGraph = () => {
         maintainAspectRatio: false,
         plugins: {
             legend: {
-                position: 'top',
-                labels: {
-                    font: {
-                        family: 'Nanum Gothic',
-                        size: size.width * 0.015 // 반응형 폰트 크기
-                    }
-                }
+                display: false,  // 라벨 제거
             },
             title: {
-                display: true,
-                text: '월별 측정 데이터',
-                font: {
-                    family: 'Nanum Gothic',
-                    size: size.width * 0.02, // 반응형 폰트 크기
-                    weight: 'bold'
+                display: false,  // 타이틀 제거
+            },
+            tooltip: {
+                enabled: true,  // 툴팁은 유지
+                callbacks: {
+                    label: function(context) {
+                        return `${context.parsed.y}`;  // 툴팁 텍스트 커스텀
+                    }
                 }
             }
         },
@@ -83,7 +91,7 @@ const LineGraph = () => {
                 ticks: {
                     font: {
                         family: 'Nanum Gothic',
-                        size: size.width * 0.012 // 반응형 폰트 크기
+                        size: size.width * 0.012
                     }
                 }
             },
@@ -94,7 +102,7 @@ const LineGraph = () => {
                 ticks: {
                     font: {
                         family: 'Nanum Gothic',
-                        size: size.width * 0.012 // 반응형 폰트 크기
+                        size: size.width * 0.012
                     }
                 }
             }
@@ -110,13 +118,22 @@ const LineGraph = () => {
         }
     };
 
-    // 차트 컨테이너 스타일
     const containerStyle = {
         width: '100%',
         height: '100%',
         padding: '20px',
         boxSizing: 'border-box'
     };
+
+    // 로딩 상태 처리
+    if (loading) {
+        return <div ref={ref} style={containerStyle}>Loading...</div>;
+    }
+
+    // 에러 상태 처리
+    if (error) {
+        return <div ref={ref} style={containerStyle}>Error: {error}</div>;
+    }
 
     return (
         <div ref={ref} style={containerStyle}>

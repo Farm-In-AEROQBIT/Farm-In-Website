@@ -1,0 +1,16 @@
+.dropdown-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px; /* 드롭다운 간 간격 조정 */
+    margin-top: 15px; /* 상단 마진 추가 */
+}
+
+.farm-dropdown, .year-dropdown, .month-dropdown, .week-dropdown, .day-dropdown {
+    width: 100px;
+    height: 50px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    text-align: center;
+}
