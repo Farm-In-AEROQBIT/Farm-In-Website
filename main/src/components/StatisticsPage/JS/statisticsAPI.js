@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'YOUR_API_BASE_URL';  // API 기본 URL 설정
+const BASE_URL = 'API_URL';  // API 기본 URL 설정
 
 export const fetchStatisticsData = async (params) => {
     try {
