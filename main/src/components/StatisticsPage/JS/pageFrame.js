@@ -40,7 +40,9 @@ const PageFrame = ({statistic}) => {
                     <div className="link-slogan-container">
                         <p className="slogan">휴머니즘이 살아있는<br/>환경 기술</p>
                         <div className="icon-link-box">
-                            <p className="link-homePage">홈페이지 링크</p>
+                        <a href="http://www.farm-in.kr" target="_blank" rel="noopener noreferrer" className="link-homePage">
+                                홈페이지 링크
+                            </a>
                             <img className="link-icon"></img>
                         </div>
                     </div>

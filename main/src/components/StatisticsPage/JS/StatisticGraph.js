@@ -1,9 +1,17 @@
 import useElementSize from './useElementSize';
 import '../CSS/StatisticGraph.css';
+import DropDown from '../JS/Dropdown';
+import '../CSS/Dropdown.css';
 
 
 const StatisticGraph = ({dataVisualization}) => {
     const [ref, bodySize] = useElementSize();
+
+// 고정된 시작 날짜와 현재 날짜 계산
+    const startDate = '2023-01-30'; // 시작 날짜 고정
+    const today = new Date();
+    const endDate = today.toISOString().split('T')[0]; // 현재 날짜를 'YYYY-MM-DD' 형식으로 변환
+
     return(
         <main className="graph-container" ref={ref}>
             <summary style={{margin: 0}} className="title-box">
@@ -18,13 +26,18 @@ const StatisticGraph = ({dataVisualization}) => {
                     {dataVisualization}
                     <hr className='bottom-hr'/>
                 </section>
-                <section className='droplist-section'>
+             {/* look-up-duration과 dropdown을 세로로 배치 */}
+             <section className='droplist-section'>
+                    {/* 조회 기간 표시 */}
                     <p className='look-up-duration'>
-                        <span className='Nanum-Gothic-bold'style={{fontSize: (bodySize.width/58)}}>김회원</span>
-                        <span className='Nanum-Gothic'style={{fontSize: (bodySize.width/58)}}>님의 조회 가능 기간은&nbsp;</span>
-                        <span className='duration-text'style={{fontSize: (bodySize.width/58)}}>2023.01.30 ~ 2024.10.07</span>
-                        <span className='Nanum-Gothic'style={{fontSize: (bodySize.width/58)}}>입니다</span>
+                        <span className='Nanum-Gothic-bold' style={{ fontSize: (bodySize.width / 58) }}>김회원</span>
+                        <span className='Nanum-Gothic' style={{ fontSize: (bodySize.width / 58) }}>님의 조회 가능 기간은&nbsp;</span>
+                        <span className='duration-text' style={{ fontSize: (bodySize.width / 58) }}>{startDate} ~ {endDate}</span>
+                        <span className='Nanum-Gothic' style={{ fontSize: (bodySize.width / 58) }}>입니다</span>
                     </p>
+                    
+                    {/* 드롭다운 리스트 배치 */}
+                    <DropDown />
                 </section>
                 <section className='btn-section'>
                     <button className='inquiry-btn' style={{fontSize: (bodySize.width/50)}}>

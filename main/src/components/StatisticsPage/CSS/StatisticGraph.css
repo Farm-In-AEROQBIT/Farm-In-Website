@@ -71,11 +71,14 @@
     justify-content: center;
 }
 
-.look-up-duration{
-    width:80%;
-    height:6%;
-    border: 1px dashed salmon;
-    padding: margin;
+.look-up-duration {
+    white-space: nowrap; /* 한 줄로 표시되게 설정 */
+    font-size: 1rem; /* 적절한 글자 크기로 설정 */
+    margin-top: 10px; /* 상단 마진 추가 */
+    text-align: center; /* 가운데 정렬 */
+    display: block; /* 한 줄로 나오게 설정 */
+    height: 50px;
+    margin-bottom: 10px;
 }
 
 .duration-text{
@@ -154,7 +157,6 @@
     right: 0;
 }
 
-
 .bottom-hr{
     position: absolute;
     bottom: 0%;
@@ -185,4 +187,69 @@
     display: grid;
     grid-template-columns: 1fr 21fr 1fr;
     grid-template-rows: 5fr 44fr 10fr;
+}
+
+.sensor-btn:hover {
+    background-color: #e0e0e0;
+}
+.sensor-btn.selected {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+.droplist-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 가운데 정렬 */
+    margin-top: 10px;
+}
+
+.chart-area {
+    flex: 9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80%; /* 차트 영역 높이 증가 */
+    border-bottom: 5px solid #ccc;
+}
+.button-area {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    padding: 10px;
+}
+.sensor-btn-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+    margin-top: 50px;
+}
+.sensor-btn {
+    padding: 10px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
+}
+.sensor-btn:hover {
+    background-color: #e0e0e0;
+}
+.sensor-btn.selected {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+.droplist-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 가운데 정렬 */
+    margin-top: 10px;
+}
+.look-up-duration {
+    white-space: nowrap; /* 텍스트가 한 줄로 표시 */
+    text-align: center; /* 텍스트 가운데 정렬 */
+    margin-bottom: 10px;
 }

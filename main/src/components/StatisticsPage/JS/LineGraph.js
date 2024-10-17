@@ -22,21 +22,40 @@ ChartJS.register(
   Legend
 );
 
-const LineGraph = () => {
+const LineGraph = ({ selectedSensor }) => {  // 선택된 센서를 props로 받아옴
     const [ref, size] = useElementSize();
     const [chartData, setChartData] = useState(null);
 
-    // 차트 데이터 설정
+    // 센서에 따른 차트 데이터 설정
     useEffect(() => {
-        const data = {
-            labels: [
-                '1월', '2월', '3월', '4월', '5월', '6월', 
-                '7월', '8월', '9월', '10월', '11월', '12월'
-            ],
+        let data = [];
+        switch (selectedSensor) {
+            case '이산화탄소':
+                data = [60, 57, 57, 57, 56, 55, 58, 57, 56, 56];
+                break;
+            case '암모니아':
+                data = [5, 6, 7, 5, 5, 4, 4, 5, 6, 7];
+                break;
+            case '온도':
+                data = [0, 5, 10, 18, 26, 35, 38, 36, 30, 22];
+                break;
+            case '습도':
+                data = [58, 59, 55, 59, 50, 60, 72, 60, 57, 57];
+                break;
+            case '미세먼지':
+                data = [763, 587, 587, 589, 590, 594, 593, 576, 572, 607];
+                break;
+            default:
+                data = [];
+        }
+
+        // 차트 데이터 설정
+        const newData = {
+            labels: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
             datasets: [
                 {
-                    label: '측정값',
-                    data: [65, 59, 80, 81, 56, 55, 40, 45, 60, 70, 75, 80],
+                    label: `${selectedSensor} 측정값`,
+                    data: data,
                     fill: false,
                     borderColor: 'rgb(75, 192, 192)',
                     tension: 0.1,
@@ -47,8 +66,9 @@ const LineGraph = () => {
                 }
             ]
         };
-        setChartData(data);
-    }, []);
+
+        setChartData(newData);
+    }, [selectedSensor]);  // 선택된 센서가 변경될 때마다 차트 데이터 변경
 
     // 차트 옵션 설정
     const options = {
@@ -66,7 +86,7 @@ const LineGraph = () => {
             },
             title: {
                 display: true,
-                text: '월별 측정 데이터',
+                text: `${selectedSensor} 측정 데이터`,
                 font: {
                     family: 'Nanum Gothic',
                     size: size.width * 0.02, // 반응형 폰트 크기
