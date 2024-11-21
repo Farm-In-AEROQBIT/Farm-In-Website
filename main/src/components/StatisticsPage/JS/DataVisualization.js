@@ -47,7 +47,7 @@ const DataVisualization = () => {
                 </section>
                 <section className='middle-section'>
                     {/* 선택된 센서를 LineGraph로 전달 */}
-                    <LineGraph selectedSensor={selectedSensor} />  
+                    <LineGraph selectedSensor={selectedSensor} />
                     
                     {/* 센서 선택 버튼 */}
                     <div className='button-area'>
