@@ -11,6 +11,7 @@ import {
   Legend
 } from 'chart.js';
 import useElementSize from './useElementSize';
+import axiosInstance from '../../../axiosInstance';
 
 ChartJS.register(
   CategoryScale,
@@ -22,9 +23,11 @@ ChartJS.register(
   Legend
 );
 
-const LineGraph = ({ selectedSensor }) => {
+const LineGraph = ({ selectedSensor, selectedButton }) => {
     const [ref, size] = useElementSize();
     const [chartData, setChartData] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     const sensorUnits = {
         '이산화탄소': 'ppm',
@@ -34,51 +37,62 @@ const LineGraph = ({ selectedSensor }) => {
         '미세먼지': 'μg/m³'
     };
 
-    // 센서에 따른 차트 데이터 설정
-    useEffect(() => {
-        let data = [];
-        switch (selectedSensor) {
-            case '이산화탄소':
-                data = [763, 587, 587, 589, 590, 594, 593, 576, 572, 607, 744];
-                break;
-            case '암모니아':
-                data = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-                break;
-            case '온도':
-                data = [0, 5, 10, 18, 26, 35, 34, 36, 30, 22, 24];
-                break;
-            case '습도':
-                data = [20, 26, 27, 38, 50, 60, 67, 36, 28, 28, 28];
-                break;
-            case '미세먼지':
-                data = [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0];
-                break;
-            default:
-                data = [];
+    const labelsMap = {
+        0: '연도 통계',
+        1: '월별 통계',
+        2: '주간 통계',
+        3: '하루 통계',
+    };
+
+    const fetchChartData = async () => {
+        setLoading(true);
+        setError(null);
+    
+        try {
+            console.log('데이터 요청 시작:', { selectedSensor, selectedButton });
+    
+            const response = await axiosInstance.get('/api/growingsensors/statistics', {
+                params: {
+                    type: 'yearly', // 기본값 설정
+                    year: '2024',
+                    sensorType: selectedSensor,
+                },
+            });
+    
+            console.log('데이터 요청 성공:', response.data);
+    
+            const { labels, averages } = response.data;
+    
+            const newData = {
+                labels,
+                datasets: [
+                    {
+                        label: `${selectedSensor} 측정값 (${sensorUnits[selectedSensor]})`,
+                        data: averages,
+                        fill: false,
+                        borderColor: 'rgb(75, 192, 192)',
+                        tension: 0.1,
+                        pointBackgroundColor: 'rgb(75, 192, 192)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(75, 192, 192)',
+                    },
+                ],
+            };
+    
+            setChartData(newData);
+        } catch (err) {
+            console.error('데이터 요청 실패:', err);
+            setError('데이터를 불러오는 중 오류가 발생했습니다.');
+        } finally {
+            setLoading(false);
         }
+    };        
 
-        // 차트 데이터 설정
-        const newData = {
-            labels: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-            datasets: [
-                {
-                    label: `${selectedSensor} 측정값`,
-                    data: data,
-                    fill: false,
-                    borderColor: 'rgb(75, 192, 192)',
-                    tension: 0.1,
-                    pointBackgroundColor: 'rgb(75, 192, 192)',
-                    pointBorderColor: '#fff',
-                    pointHoverBackgroundColor: '#fff',
-                    pointHoverBorderColor: 'rgb(75, 192, 192)'
-                }
-            ]
-        };
+    useEffect(() => {
+        fetchChartData();
+    }, [selectedSensor, selectedButton]);
 
-        setChartData(newData);
-    }, [selectedSensor]);  // 선택된 센서가 변경될 때마다 차트 데이터 변경
-
-    // 차트 옵션 설정
     const options = {
         responsive: true,
         maintainAspectRatio: false,
@@ -148,7 +162,6 @@ const LineGraph = ({ selectedSensor }) => {
         }
     };
 
-    // 차트 컨테이너 스타일
     const containerStyle = {
         width: '100%',
         height: '100%',
@@ -158,6 +171,8 @@ const LineGraph = ({ selectedSensor }) => {
 
     return (
         <div ref={ref} style={containerStyle}>
+            {loading && <p>로딩 중...</p>}
+            {error && <p>{error}</p>}
             {chartData && (
                 <Line 
                     data={chartData} 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '../CSS/Form.css';
-import axiosInstance from '../../../axiosInterceptor';
+import axiosInstance from '../../../axiosInstance';
 import { useNavigate } from 'react-router-dom';
 
 const Form = () => {
@@ -18,24 +18,36 @@ const Form = () => {
 
   const onClickLogin = async () => {
     try {
-      const response = await axiosInstance.post('/open-api/user/login', {
-        username: inputId,
-        password: inputPw,
-      });
+        const response = await axiosInstance.post('/open-api/user/login', {
+            username: inputId,
+            password: inputPw,
+        });
 
-      console.log('로그인 성공:', response.data);
-      
-      // 로컬 스토리지에 토큰 저장
-      localStorage.setItem('accessToken', response.data.result.accessToken);
-      localStorage.setItem('refreshToken', response.data.result.refreshToken);
+        console.log('로그인 성공:', response.data);
 
-      // 로그인 성공 시 홈 페이지로 이동
-      navigate('/statistics');
+        // 응답 데이터에서 토큰 추출
+        const accessToken = response.data.body.access_token;
+        const refreshToken = response.data.body.refresh_token;
+
+        if (!accessToken || !refreshToken) {
+            throw new Error('토큰이 응답에 포함되지 않았습니다.');
+        }
+
+        // 로컬 스토리지에 토큰 저장
+        localStorage.setItem('accessToken', accessToken);
+        localStorage.setItem('refreshToken', refreshToken);
+
+        console.log('저장된 AccessToken:', localStorage.getItem('accessToken'));
+        console.log('저장된 RefreshToken:', localStorage.getItem('refreshToken'));
+
+        // 로그인 성공 시 통계 페이지로 이동
+        navigate('/statistics');
     } catch (error) {
-      console.error('로그인 실패:', error.response?.data || error.message);
-      alert('로그인에 실패했습니다. 아이디와 비밀번호를 확인해주세요.');
+        console.error('로그인 실패:', error.response?.data || error.message);
+        alert('로그인에 실패했습니다. 아이디와 비밀번호를 확인해주세요.');
     }
-  };
+};
+
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
