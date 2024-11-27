@@ -3,7 +3,7 @@ import axios from 'axios';
 
 // Axios 인스턴스 생성
 const axiosInstance = axios.create({
-    baseURL: 'http://localhost:8080', // 백엔드 API 주소
+    baseURL: 'http://118.42.54.88:8080', // 백엔드 API 주소
     headers: {
         'Content-Type': 'application/json',
     },

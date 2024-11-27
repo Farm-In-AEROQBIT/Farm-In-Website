@@ -7,7 +7,7 @@
 }
 
 .graph-container{
-    border: 1px solid salmon;
+    /*border: 1px solid salmon;*/
     width:100%;
     aspect-ratio: 8/10;
     display: flex;
@@ -20,6 +20,7 @@
     height: fit-content;
     border: 1px dashed salmon;
     text-align: center;
+    border: none; /* 점선 제거 */
 }
 
 .Nanum-Gothic-bold{
@@ -54,6 +55,7 @@
     border: 2px dotted salmon;
     grid-template-columns: 3fr 2fr;
     grid-template-rows: 148fr 91fr;
+    border: none; /* 점선 제거 */
 }
 
 .display-section{
@@ -187,6 +189,7 @@
     display: grid;
     grid-template-columns: 1fr 21fr 1fr;
     grid-template-rows: 5fr 44fr 10fr;
+    border: none; /* 점선 제거 */
 }
 
 .sensor-btn:hover {

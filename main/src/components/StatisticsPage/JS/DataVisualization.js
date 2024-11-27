@@ -11,13 +11,28 @@ const DataVisualization = () => {
     const [ref, bodySize] = useElementSize();
     const buttons = ['연도 통계', '월별 통계', '주간 통계', '하루 통계'];
 
+    // 현재 달과 주차 계산
+    const getCurrentMonthAndWeek = () => {
+        const today = new Date();
+        const currentMonth = today.getMonth() + 1; // 월은 0부터 시작하므로 +1
+        const currentDate = today.getDate();
+
+        // 해당 달의 첫 번째 날로부터 주차 계산
+        const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+        const weekNumber = Math.ceil((currentDate + startOfMonth.getDay()) / 7);
+
+        return { currentMonth, weekNumber };
+    };
+
+    const { currentMonth, weekNumber } = getCurrentMonthAndWeek();
+
     const handleButtonClick = (index) => {
         setSelectedButton(index);
     };
 
     // 센서 클릭 시 센서를 설정하는 함수
     const handleSensorClick = (sensor) => {
-        setSelectedSensor(sensor);  // 선택된 센서를 상태로 설정
+        setSelectedSensor(sensor); // 선택된 센서를 상태로 설정
     };
 
     return (
@@ -25,16 +40,26 @@ const DataVisualization = () => {
             <div className='component-chart-grid' ref={ref}>
                 <section className='upper-section'>
                     <p className='summing-up-text'>
-                        <span style={{fontSize: bodySize.width * 0.02}} className='numeric-text'>10</span>
-                        <span style={{fontSize: bodySize.width * 0.02}} className='ascii-test'>월&nbsp;</span>
-                        <span style={{fontSize: bodySize.width * 0.02}} className='numeric-text'>3</span>
-                        <span style={{fontSize: bodySize.width * 0.02}} className='ascii-test'>주차의&nbsp;</span>
-                        <span style={{fontSize: bodySize.width * 0.02}} className='ascii-test'>{selectedSensor}의 측정값입니다.&nbsp;</span>
+                        <span style={{ fontSize: bodySize.width * 0.02 }} className='numeric-text'>
+                            {currentMonth}
+                        </span>
+                        <span style={{ fontSize: bodySize.width * 0.02 }} className='ascii-test'>
+                            월&nbsp;
+                        </span>
+                        <span style={{ fontSize: bodySize.width * 0.02 }} className='numeric-text'>
+                            {weekNumber}
+                        </span>
+                        <span style={{ fontSize: bodySize.width * 0.02 }} className='ascii-test'>
+                            주차의&nbsp;
+                        </span>
+                        <span style={{ fontSize: bodySize.width * 0.02 }} className='ascii-test'>
+                            {selectedSensor}의 측정값입니다.&nbsp;
+                        </span>
                     </p>
                     <div className='btn-container'>
                         {buttons.map((button, index) => (
                             <button
-                                style={{fontSize: bodySize.width * 0.019}}
+                                style={{ fontSize: bodySize.width * 0.019 }}
                                 className={`period-btn ${selectedButton === index ? 'selected' : ''}`} // 선택된 버튼에 클래스 추가
                                 key={index}
                                 onClick={() => handleButtonClick(index)}
@@ -43,7 +68,7 @@ const DataVisualization = () => {
                             </button>
                         ))}
                     </div>
-                    <hr className='graph-hr'/>
+                    <hr className='graph-hr' />
                 </section>
                 <section className='middle-section'>
                     {/* 선택된 센서를 LineGraph로 전달 */}

@@ -22,28 +22,36 @@ ChartJS.register(
   Legend
 );
 
-const LineGraph = ({ selectedSensor }) => {  // 선택된 센서를 props로 받아옴
+const LineGraph = ({ selectedSensor }) => {
     const [ref, size] = useElementSize();
     const [chartData, setChartData] = useState(null);
+
+    const sensorUnits = {
+        '이산화탄소': 'ppm',
+        '암모니아': 'ppm',
+        '온도': '°C',
+        '습도': '%',
+        '미세먼지': 'μg/m³'
+    };
 
     // 센서에 따른 차트 데이터 설정
     useEffect(() => {
         let data = [];
         switch (selectedSensor) {
             case '이산화탄소':
-                data = [60, 57, 57, 57, 56, 55, 58, 57, 56, 56];
+                data = [763, 587, 587, 589, 590, 594, 593, 576, 572, 607, 744];
                 break;
             case '암모니아':
-                data = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                data = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
                 break;
             case '온도':
-                data = [0, 5, 10, 18, 26, 35, 34, 36, 30, 22];
+                data = [0, 5, 10, 18, 26, 35, 34, 36, 30, 22, 24];
                 break;
             case '습도':
-                data = [58, 59, 55, 59, 50, 60, 72, 60, 57, 57];
+                data = [20, 26, 27, 38, 50, 60, 67, 36, 28, 28, 28];
                 break;
             case '미세먼지':
-                data = [763, 587, 587, 589, 590, 594, 593, 576, 572, 607];
+                data = [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0];
                 break;
             default:
                 data = [];
@@ -86,11 +94,20 @@ const LineGraph = ({ selectedSensor }) => {  // 선택된 센서를 props로 받
             },
             title: {
                 display: true,
-                text: `${selectedSensor} 측정 데이터`,
+                text: `${selectedSensor} 측정 데이터 (${sensorUnits[selectedSensor]})`,
                 font: {
                     family: 'Nanum Gothic',
                     size: size.width * 0.02, // 반응형 폰트 크기
                     weight: 'bold'
+                }
+            },
+            tooltip: {
+                callbacks: {
+                    label: (context) => {
+                        const value = context.raw; // 데이터 값
+                        const unit = sensorUnits[selectedSensor] || ''; // 센서 단위
+                        return `${value} ${unit}`;
+                    }
                 }
             }
         },
@@ -101,6 +118,7 @@ const LineGraph = ({ selectedSensor }) => {  // 선택된 센서를 props로 받
                     color: 'rgba(0, 0, 0, 0.1)'
                 },
                 ticks: {
+                    callback: (value) => `${value} ${sensorUnits[selectedSensor] || ''}`, // Y축에 단위 추가
                     font: {
                         family: 'Nanum Gothic',
                         size: size.width * 0.012 // 반응형 폰트 크기
