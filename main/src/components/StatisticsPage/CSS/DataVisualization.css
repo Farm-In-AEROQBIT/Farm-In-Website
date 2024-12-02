@@ -62,17 +62,44 @@
     color: #1c1c1c
 }
 
-.middle-section{
+.middle-section {
     position: relative;
-    grid-column: 2/3;
-    grid-row: 2/3;
     display: flex;
-    flex-direction: column; /* 세로로 배치 */
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 100%;
+    height: 500px; /* 차트 높이 고정 */
 }
+
+.button-area {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.sensor-btn-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.sensor-btn {
+    padding: 10px 20px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
+}
+
+.sensor-btn.selected {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
 
 .btn-container{
     position: absolute;

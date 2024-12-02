@@ -1,4 +1,3 @@
-// axiosInstance.js
 import axios from 'axios';
 
 // Axios 인스턴스 생성
@@ -12,9 +11,11 @@ const axiosInstance = axios.create({
 // 요청 인터셉터
 axiosInstance.interceptors.request.use(
     (config) => {
-        const token = localStorage.getItem('token'); // JWT 토큰 가져오기
-        if (token) {
-            config.headers.Authorization = `Bearer ${token}`; // Authorization 헤더에 토큰 추가
+        const accessToken = localStorage.getItem('accessToken'); // JWT 토큰 가져오기
+        if (accessToken) {
+            config.headers['Authorization'] = `Bearer ${accessToken}`; // Authorization 헤더에 토큰 추가
+        } else {
+            console.warn('AccessToken이 로컬 스토리지에 없습니다.');
         }
         return config;
     },
@@ -24,9 +25,9 @@ axiosInstance.interceptors.request.use(
 // 응답 인터셉터
 axiosInstance.interceptors.response.use(
     (response) => response,
-    (error) => {
-        if (error.response && error.response.status === 401) {
-            // 토큰 만료 또는 인증 실패 시 처리
+    async (error) => {
+        // 인증 실패 시
+        if (error.response?.status === 401) {
             alert('인증 정보가 유효하지 않습니다. 다시 로그인해주세요.');
             window.location.href = '/'; // 로그인 페이지로 이동
         }
