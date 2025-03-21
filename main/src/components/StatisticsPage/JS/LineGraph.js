@@ -136,7 +136,7 @@ const LineGraph = ({ selectedSensor, selectedButton }) => {
     fetchChartData();
   }, [selectedSensor, selectedButton]);
 
-  // 차트 옵션
+  // 차트 옵션 차트의 옵션이기에 별도의 컨테이너로 감싸야 함
   const options = {
     responsive: true,
     maintainAspectRatio: false, // 높이 유지 방지
@@ -192,9 +192,10 @@ const LineGraph = ({ selectedSensor, selectedButton }) => {
     }
   };
 
+  // 해당 스타일 들을  별도의 메소드로서 재 정의 하고 확립 (코드의 재 사용성을 높이기 위해)
   const containerStyle = {
     width: '100%',
-    height: '410px', // 고정된 높이로 설정
+    height: '410px', // 고정된 높이로 설정  // 기본으로 설정 되어 있는 높이로 변환 시키고, 이후 PC, 모바일, 테블릿 등으로 변수의 값을 설정할 수 있도록 값을 변환
     padding: '20px',
     boxSizing: 'border-box'
   };
@@ -208,7 +209,7 @@ const LineGraph = ({ selectedSensor, selectedButton }) => {
           data={chartData}
           options={options}
           width={size.width}
-          height={450} // 고정된 높이 전달
+          height={450} // 고정된 높이 전달 // 195 Line과 동일
         />
       )}
     </div>
