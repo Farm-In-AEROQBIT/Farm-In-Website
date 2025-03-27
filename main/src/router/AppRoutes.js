@@ -9,6 +9,7 @@ import LinkLogIn from '../components/SignupPage/JS/LinkLogIn';
 import StatisticsFrame from '../components/StatisticsPage/JS/pageFrame';
 import StatisticGraph from '../components/StatisticsPage/JS/StatisticGraph';
 import DataVisualization from '../components/StatisticsPage/JS/DataVisualization';
+import AdminPage from '../components/AdminPage/JS/AdminPage';
 
 const AppRoutes = () => {
     return (
@@ -16,6 +17,7 @@ const AppRoutes = () => {
             <Route path="/" element={<LogInFrame form={<Form />} link={<LinkSignIn />}/>} />
             <Route path="/signup" element={<SignupFrame form={<SignupForm/>} link={<LinkLogIn/>}/>} />
             <Route path="/statistics" element={<StatisticsFrame statistic={<StatisticGraph dataVisualization={<DataVisualization/>}/>}/>} />
+            <Route path="/admin" element={<AdminPage />} />
         </Routes>
     );
 };

@@ -1,0 +1,136 @@
+.admin-page {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Nanum Gothic Coding', sans-serif;
+}
+
+.header {
+  background-color: #000000;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+.footer-box {
+  background-color: #000000;
+  color: white;
+  padding: 20px;
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.information-left,
+.information-right {
+  display: flex;
+  flex-direction: column;
+}
+
+.crud-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+  padding: 20px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.user-crud, .farm-crud {
+  margin: 10px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.crud-button-group {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.user-crud button, .farm-crud button {
+  margin: 5px;
+}
+
+button {
+  background-color: #33A0C9;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #3cb3e2;
+}
+
+.crud-content {
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f5f5f5;
+  max-width: 800px;
+}
+
+h2 {
+  color: #33A0C9;
+}
+
+.company-logo {
+  width: 150px;
+  height: 50px;
+  margin: 0 auto;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.footer-logo {
+  width: 100px;
+  height: auto;
+}
+
+.information {
+  margin: 5px 0;
+}
+
+.contact {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.Nanum-bold {
+  font-weight: bold;
+}
+
+.Nanum {
+  font-family: 'Nanum Gothic Coding', sans-serif;
+}
+
+/* 수정 부분: CRUD 탭 내부 요소 간 간격 */
+.crud-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* 요소 간 간격 조정 */
+}
+
+.crud-form select,
+.crud-form input,
+.crud-form button {
+  margin: 10px 0; /* 간격 추가 */
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.crud-form label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
