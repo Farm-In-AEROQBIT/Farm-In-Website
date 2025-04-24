@@ -2,11 +2,11 @@ import axios from 'axios';
 
 // Axios 인스턴스 생성
 const axiosInstance = axios.create({
-    baseURL: 'http://118.42.54.88:8080', // 백엔드 API 주소
+    baseURL: 'http://211.230.2.77:8080', // 서버 URL
     headers: {
-        'Content-Type': 'application/json',
-    },
-});
+      'Content-Type': 'application/json'
+    }
+  });
 
 // 요청 인터셉터
 axiosInstance.interceptors.request.use(

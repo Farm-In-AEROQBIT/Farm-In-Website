@@ -28,6 +28,9 @@ const Form = () => {
         // 응답 데이터에서 토큰 추출
         const accessToken = response.data.body.access_token;
         const refreshToken = response.data.body.refresh_token;
+        const isAdmin = response.data.body.admin;
+
+        console.log('isAdmin 값:', isAdmin); console.log('isAdmin 타입:', typeof isAdmin);
 
         if (!accessToken || !refreshToken) {
             throw new Error('토큰이 응답에 포함되지 않았습니다.');
@@ -35,13 +38,21 @@ const Form = () => {
 
         // 로컬 스토리지에 토큰 저장
         localStorage.setItem('accessToken', accessToken);
-        localStorage.setItem('refreshToken', refreshToken);
+        localStorage.setItem('refreshToken', refreshToken); 
+        //localStorage.setItem('isAdmin', isAdmin ? 'true' : 'false');
+        localStorage.setItem('isAdmin', String(isAdmin));
+
+        if (isAdmin) {
+          navigate('/admin');
+        } else {
+          navigate('/statistics');
+        }
 
         console.log('저장된 AccessToken:', localStorage.getItem('accessToken'));
         console.log('저장된 RefreshToken:', localStorage.getItem('refreshToken'));
 
         // 로그인 성공 시 통계 페이지로 이동
-        navigate('/statistics');
+        //navigate('/statistics');
     } catch (error) {
         console.error('로그인 실패:', error.response?.data || error.message);
         alert('로그인에 실패했습니다. 아이디와 비밀번호를 확인해주세요.');

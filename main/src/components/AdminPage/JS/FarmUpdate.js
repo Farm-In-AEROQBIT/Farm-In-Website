@@ -1,39 +1,41 @@
 import React, { useState } from 'react';
 
-const FarmUpdate = () => {
-  const [userId, setUserId] = useState('');
-  const [farmName, setFarmName] = useState('');
+export const FarmUpdate = () => {
+  const [farmId, setFarmId] = useState('');
+  const [newFarmName, setNewFarmName] = useState('');
   const [barnName, setBarnName] = useState('');
   const [snFarmId, setSnFarmId] = useState('');
-  const [newFarmName, setNewFarmName] = useState('');
 
-  const handleUpdate = () => {
-    console.log('농장 업데이트:', { userId, farmName, barnName, snFarmId, newFarmName });
-    alert(`농장 업데이트 완료\nUser ID: ${userId}\nFarm Name: ${farmName}\nBarn Name: ${barnName}\nSN Farm ID: ${snFarmId}\nNew Farm Name: ${newFarmName}`);
+  const handleUpdate = async () => {
+    try {
+      const res = await axiosInstance.put(`/api/farm-info/${farmId}`, {
+        farm_name: newFarmName,
+        barn_name: barnName,
+        sn_farm_id: snFarmId,
+      });
+      alert(`농장 업데이트 완료: ${JSON.stringify(res.data.body)}`);
+    } catch (err) {
+      alert('업데이트 실패: ' + err.response?.data?.body?.result_message);
+    }
   };
 
   return (
     <div className="crud-form">
       <h3>농장 업데이트</h3>
-      <select value={userId} onChange={(e) => setUserId(e.target.value)}>
-        <option value="" disabled>사용자 선택</option>
-        <option value="user1">user1</option>
-        <option value="user2">user2</option>
-      </select>
-      <select value={farmName} onChange={(e) => setFarmName(e.target.value)}>
-        <option value="" disabled>Farm Name 선택</option>
-        <option value="farm1">farm1</option>
-        <option value="farm2">farm2</option>
-      </select>
-      <select value={barnName} onChange={(e) => setBarnName(e.target.value)}>
-        <option value="" disabled>Barns Name 선택</option>
-        <option value="barn1">barn1</option>
-        <option value="barn2">barn2</option>
-      </select>
+      <input
+        placeholder="Farm ID"
+        value={farmId}
+        onChange={(e) => setFarmId(e.target.value)}
+      />
       <input
         placeholder="New Farm Name"
         value={newFarmName}
         onChange={(e) => setNewFarmName(e.target.value)}
+      />
+      <input
+        placeholder="Barn Name"
+        value={barnName}
+        onChange={(e) => setBarnName(e.target.value)}
       />
       <input
         placeholder="SN Farm ID"

@@ -2,74 +2,74 @@
 
 @font-face {
     font-family: "nanum gothic light";
-    src: url("../../../assets/fonts/나눔고딕L.woff") format('woff'), url("../../../assets/fonts/나눔고딕L.ttf") format('truetype');
+    src: url("../../../assets/fonts/나눔고딕L.woff") format('woff'),
+         url("../../../assets/fonts/나눔고딕L.ttf") format('truetype');
     font-weight: normal;
     font-style: normal;
 }
 
-.component-chart-grid{
-    position: absolute;
-    width:85%;
-    height:90%;
-    /* aspect-ratio: 1/0.7; */
-    /*border: 1px dashed salmon;*/
-    left: 50%;
-    bottom: 0%;
-    transform: translate(-50%, 0%);
-
+.component-chart-grid {
+    position: relative;
+    width: 85%;
+    height: 90%;
+    margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr 21fr 1fr;
-    grid-template-rows: 5fr 44fr 10fr;
-}
-
-.graph-hr{
-
-    position: absolute;
-    bottom: 0%;
-    border: 0px;
-    margin: 0;
-    border-top: 3px solid #5E5E5E;
-    width: 100%;
-
-}
-
-.upper-section{
+    grid-template-rows: auto 1fr auto;
+  }
+  
+  /* 🔼 위쪽 요약 문구 영역 */
+  .upper-section {
     position: relative;
-    grid-column: 1/4;
+    grid-column: 1 / 4;
     grid-row: 1;
     display: flex;
-    border: none; /* 점선 제거 */
-}
-
-.summing-up-text{
-    position: absolute;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 10px;      /* 👉 살짝만 띄우기 */
+    padding-bottom: 0px;    /* 👉 아래쪽은 최소화 */
+    min-height: 60px;
+  }
+  
+  /* 요약 문구 텍스트 */
+  .summing-up-text {
+    margin-bottom: 5px;
+    text-align: center;
+    font-size: 1rem;
+  }
+  
+  /* 구분선 */
+  .graph-hr {
+    width: 100%;
+    border: none;
+    border-top: 3px solid #5E5E5E;
     margin: 0;
-    top: 50%;
-    transform: translate(0%, -50%);
-}
+    padding: 0;
+  }
+  
+  /* 그래프 영역 */
+  .middle-section {
+    grid-column: 2 / 3;
+    grid-row: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 500px;
+  }
+  
 
-.numeric-text{
+.numeric-text {
     font-family: "Nanum Gothic", sans-serif;
     font-weight: 700;
-    font-style: bold;
     color: #33a0C9;
 }
 
-.ascii-test{
+.ascii-test {
     font-family: "Nanum Gothic", sans-serif;
     font-weight: 500;
-    font-style: normal;
-    color: #1c1c1c
-}
-
-.middle-section {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 500px; /* 차트 높이 고정 */
+    color: #1c1c1c;
 }
 
 .button-area {
@@ -79,19 +79,31 @@
     gap: 15px;
 }
 
+/* ✅ 센서 버튼 컨테이너 및 버튼 스타일 */
 .sensor-btn-container {
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 10px;
+    margin-top: 15px;
 }
 
 .sensor-btn {
     padding: 10px 20px;
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
+    font-size: 15px;
+    background-color: #e6e6e6;
+    color: #333;
+    border: 1px solid #999;
+    border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-    text-align: center;
+    transition: all 0.3s ease;
+    font-family: "Nanum Gothic", sans-serif;
+    font-weight: bold;
+}
+
+.sensor-btn:hover {
+    background-color: #d4eaff;
+    color: #000;
 }
 
 .sensor-btn.selected {
@@ -100,13 +112,13 @@
     border-color: #007bff;
 }
 
-
-.btn-container{
+/* 선택 기간 버튼은 현재 사용하지 않지만 유지 */
+.btn-container {
     position: absolute;
     right: 0;
     width: 43.6%;
     height: 75%;
-    border: none; /* 점선 제거 */
+    border: none;
 }
 
 .period-btn {
@@ -116,12 +128,13 @@
     width: 25%;
     height: 95%;
     background-color: #EEEEEE;
-    top:0%;
+    top: 0%;
     right: 0%;
 }
 
 .period-btn.selected {
     background-color: black;
+    color: white;
 }
 
 .period-btn:first-child {
@@ -133,3 +146,88 @@
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
 }
+
+.chart-container {
+    position: relative;
+    width: 100%; 
+    height: 400px;
+    overflow: hidden;
+    box-sizing: border-box;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    background-color: #fff;
+  }
+  
+  .loading-overlay, 
+  .error-message, 
+  .no-data-message,
+  .chart-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255,255,255,0.9);
+    z-index: 10;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: 16px;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .error-message {
+    color: #d9534f;
+  }
+  
+  .no-data-message, .chart-placeholder {
+    color: #777;
+  }
+
+  .chart-container {
+    width: 100%;
+    height: 400px;
+    max-height: 400px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    margin: 20px 0;
+  }
+  
+  .loading-overlay, 
+  .error-message, 
+  .no-data-message,
+  .chart-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255,255,255,0.9);
+    z-index: 10;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: 16px;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .error-message {
+    color: #d9534f;
+  }
+  
+  .no-data-message, .chart-placeholder {
+    color: #777;
+  }
+  
+  .middle-section {
+    height: 400px !important;
+    max-height: 400px !important;
+    overflow: hidden;
+  }

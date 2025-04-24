@@ -1,21 +1,8 @@
-// LineGraph.js
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-import 'chartjs-adapter-date-fns';
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-  TimeScale
-} from 'chart.js';
-import useElementSize from './useElementSize';
-import axiosInstance from '../../../axiosInstance';
 
+// Chart.js 컴포넌트 등록
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -23,52 +10,40 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip,
-  Legend,
-  TimeScale
+  Legend
 );
 
-const LineGraph = ({ selectedSensor, selectedButton }) => {
-  const [ref, size] = useElementSize();
+// 차트 색상 배열
+const CHART_COLORS = [
+  'rgb(255, 99, 132)',  // 빨강
+  'rgb(54, 162, 235)',  // 파랑
+  'rgb(75, 192, 192)',  // 청록
+  'rgb(255, 159, 64)',  // 주황
+  'rgb(153, 102, 255)', // 보라
+  'rgb(201, 203, 207)', // 회색
+  'rgb(255, 205, 86)'   // 노랑
+];
+
+const LineGraph = ({ filter }) => {
+  const chartContainer = useRef(null);
   const [chartData, setChartData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [lastRequest, setLastRequest] = useState({ sensor: null, button: null });
 
-  // 통계 타입을 반환
-  const getStatisticsType = (buttonIndex) => {
-    switch (buttonIndex) {
-      case 0: return 'yearly';
-      case 1: return 'monthly';
-      case 2: return 'weekly';
-      case 3: return 'daily';
-      default: return 'yearly';
+  useEffect(() => {
+    console.log("LineGraph filter 변경:", filter);
+    
+    if (!filter || !filter.showGraph) {
+      console.log("필수 필터 정보 없음");
+      setChartData(null); // 차트 데이터 초기화
+      return; // 필요한 필터 정보가 없으면 그래프를 표시하지 않음
     }
-  };
 
-  // X축 시간 단위를 반환
-  const getTimeUnit = (buttonIndex) => {
-    switch (buttonIndex) {
-      case 0: return 'year';
-      case 1: return 'month';
-      case 2: return 'week';
-      case 3: return 'day';
-      default: return 'year';
-    }
-  };
-
-  // 센서 단위 설정
-  const sensorUnits = {
-    '이산화탄소': 'ppm',
-    '암모니아': 'ppm',
-    '온도': '°C',
-    '습도': '%',
-    '미세먼지': 'μg/m³'
-  };
-
-  // 데이터 가져오기
-  const fetchChartData = async () => {
-    if (loading || 
-        (lastRequest.sensor === selectedSensor && lastRequest.button === selectedButton)) {
+    // 실제로 필요한 모든 데이터가 있는지 확인
+    if (!filter.sectionId || !filter.sectionType || !filter.sensors || !Array.isArray(filter.sensors) || filter.sensors.length === 0) {
+      console.log("필터 정보가 있지만 필수 데이터가 없음:", filter);
+      setError("필요한 센서 데이터가 없습니다.");
+      setChartData(null);
       return;
     }
 
@@ -76,140 +51,220 @@ const LineGraph = ({ selectedSensor, selectedButton }) => {
     setError(null);
 
     try {
-      console.log('데이터 요청 시작:', { selectedSensor, selectedButton });
+      // 센서 데이터 배열
+      const sensorsData = filter.sensors;
+      
+      if (sensorsData.length === 0) {
+        setError("선택한 섹션에 센서 데이터가 없습니다.");
+        setLoading(false);
+        setChartData(null);
+        return;
+      }
 
-      const response = await axiosInstance.get('/api/growingsensors/statistics', {
-        params: {
-          type: getStatisticsType(selectedButton),
-          year: '2024',
-          sensorType: selectedSensor,
-        },
+      console.log("처리할 센서 데이터:", sensorsData.length);
+
+      // 시간 필드 이름 확인 (timestamp 또는 time)
+      const timeField = sensorsData[0].timestamp ? 'timestamp' : 'time';
+      
+      // 모든 센서 데이터 시간별로 정렬
+      const sortedData = [...sensorsData]
+        .sort((a, b) => new Date(a[timeField]) - new Date(b[timeField]));
+      
+      // 최근 50개의 데이터만 사용
+      const recentData = sortedData.slice(Math.max(0, sortedData.length - 50));
+
+      // 시간 레이블 만들기
+      const labels = recentData.map(item => {
+        const time = item[timeField];
+        return time ? new Date(time).toLocaleTimeString('ko-KR', {
+          hour: '2-digit',
+          minute: '2-digit'
+        }) : '';
       });
 
-      console.log('데이터 요청 성공:', response.data);
+      // 데이터셋 만들기
+      const datasets = [];
+      
+      // 온도 데이터 추가
+      if (recentData.some(item => item.temperature || item.temper)) {
+        const tempField = recentData.some(item => item.temperature) ? 'temperature' : 'temper';
+        datasets.push({
+          label: "온도 (°C)",
+          data: recentData.map(item => parseFloat(item[tempField] || 0)),
+          borderColor: CHART_COLORS[0],
+          backgroundColor: `${CHART_COLORS[0]}33`,
+          tension: 0.3,
+          pointRadius: 2
+        });
+      }
+      
+      // 습도 데이터 추가
+      if (recentData.some(item => item.humidity)) {
+        datasets.push({
+          label: "습도 (%)",
+          data: recentData.map(item => parseFloat(item.humidity || 0)),
+          borderColor: CHART_COLORS[1],
+          backgroundColor: `${CHART_COLORS[1]}33`,
+          tension: 0.3,
+          pointRadius: 2
+        });
+      }
+      
+      // CO2 데이터 추가
+      if (recentData.some(item => item.co2)) {
+        datasets.push({
+          label: "CO2 (ppm)",
+          data: recentData.map(item => parseFloat(item.co2 || 0)),
+          borderColor: CHART_COLORS[2],
+          backgroundColor: `${CHART_COLORS[2]}33`,
+          tension: 0.3,
+          pointRadius: 2
+        });
+      }
+      
+      // 수온 데이터 추가 (water_temperature 필드 추가)
+      if (recentData.some(item => item.wtemper || item.waterTemperature || item.water_temperature)) {
+        // 세 가지 가능한 필드명 중 존재하는 것 확인
+        const waterTempField = recentData.some(item => item.water_temperature) ? 'water_temperature' : 
+                              recentData.some(item => item.wtemper) ? 'wtemper' : 'waterTemperature';
+        
+        console.log("수온 데이터 필드 발견:", waterTempField);
+        
+        datasets.push({
+          label: "수온 (°C)",
+          data: recentData.map(item => parseFloat(item[waterTempField] || 0)),
+          borderColor: CHART_COLORS[3],
+          backgroundColor: `${CHART_COLORS[3]}33`,
+          tension: 0.3,
+          pointRadius: 2
+        });
+      }
 
-      const fieldMap = {
-        '이산화탄소': 'co2',
-        '암모니아': 'nh3',
-        '온도': 'temper',
-        '습도': 'humidity',
-        '미세먼지': 'pm',
-      };
-
-      const sortedData = [...response.data].sort((a, b) => new Date(a.time) - new Date(b.time));
-
-      const labels = sortedData.map(item => new Date(item.time));
-      const data = sortedData.map(item => {
-        const value = parseFloat(item[fieldMap[selectedSensor]]);
-        return isNaN(value) ? null : value;
-      });
-
-      console.log('Sorted Labels:', labels);
-      console.log('Sorted Data:', data);
-
-      const newData = {
-        labels: labels,
-        datasets: [
-          {
-            label: `${selectedSensor} 측정값 (${sensorUnits[selectedSensor]})`,
-            data: data,
-            fill: false,
-            borderColor: 'rgb(75, 192, 192)',
-            tension: 0.1,
-            pointBackgroundColor: 'rgb(75, 192, 192)',
-            pointHoverRadius: 5,
-          },
-        ],
-      };
-
-      setChartData(newData);
-      setLastRequest({ sensor: selectedSensor, button: selectedButton });
+      console.log("차트 데이터 준비 완료:", labels.length, datasets.length);
+      
+      if (labels.length === 0 || datasets.length === 0) {
+        setError("표시할 데이터가 없습니다.");
+        setChartData(null);
+      } else {
+        // 차트 데이터 설정
+        setChartData({
+          labels,
+          datasets
+        });
+      }
+      
+      setLoading(false);
     } catch (err) {
-      console.error('데이터 요청 실패:', err);
-      setError('데이터를 불러오는 중 오류가 발생했습니다.');
-    } finally {
+      console.error("그래프 데이터 처리 오류:", err);
+      setError("데이터를 처리하는 중 오류가 발생했습니다.");
+      setChartData(null);
       setLoading(false);
     }
-  };
+  }, [filter]);
 
-  useEffect(() => {
-    fetchChartData();
-  }, [selectedSensor, selectedButton]);
-
-  // 차트 옵션 차트의 옵션이기에 별도의 컨테이너로 감싸야 함
-  const options = {
-    responsive: true,
-    maintainAspectRatio: false, // 높이 유지 방지
-    plugins: {
-      legend: {
-        position: 'top',
-        labels: {
-          font: {
-            family: 'Nanum Gothic',
-            size: size.width * 0.015,
-          }
-        }
-      },
-      title: {
-        display: true,
-        text: `${selectedSensor} 측정 데이터 (${sensorUnits[selectedSensor]})`,
-        font: {
-          family: 'Nanum Gothic',
-          size: size.width * 0.02,
-          weight: 'bold'
-        }
-      }
-    },
-    scales: {
-      y: {
-        beginAtZero: true,
-        ticks: {
-          callback: (value) => `${value} ${sensorUnits[selectedSensor] || ''}`,
-          font: {
-            family: 'Nanum Gothic',
-            size: size.width * 0.012
-          }
-        }
-      },
-      x: {
-        type: 'time',
-        time: {
-          unit: getTimeUnit(selectedButton),
-          displayFormats: {
-            year: 'yyyy',
-            month: 'yyyy-MM',
-            week: 'yyyy-MM-dd',
-            day: 'yyyy-MM-dd HH:mm'
-          }
-        },
-        ticks: {
-          font: {
-            family: 'Nanum Gothic',
-            size: size.width * 0.012
-          }
-        }
-      }
-    }
-  };
-
-  // 해당 스타일 들을  별도의 메소드로서 재 정의 하고 확립 (코드의 재 사용성을 높이기 위해)
-  const containerStyle = {
-    width: '100%',
-    height: '410px', // 고정된 높이로 설정  // 기본으로 설정 되어 있는 높이로 변환 시키고, 이후 PC, 모바일, 테블릿 등으로 변수의 값을 설정할 수 있도록 값을 변환
-    padding: '20px',
-    boxSizing: 'border-box'
-  };
+  if (!filter || !filter.showGraph) {
+    return <div className="chart-placeholder">돈사를 선택하고 정보 조회 버튼을 눌러주세요.</div>;
+  }
 
   return (
-    <div ref={ref} style={containerStyle}>
-      {loading && <p>로딩 중...</p>}
-      {error && <p>{error}</p>}
+    <div 
+      className="chart-container" 
+      ref={chartContainer} 
+      style={{ 
+        width: '100%', 
+        height: '400px', 
+        maxHeight: '400px',
+        position: 'relative',
+        overflow: 'hidden'
+      }}
+    >
+      {loading && <div className="loading-overlay">데이터를 불러오는 중입니다...</div>}
+      {error && <div className="error-message">{error}</div>}
+      {!chartData && !loading && !error && <div className="no-data-message">표시할 데이터가 없습니다.</div>}
       {chartData && (
-        <Line
-          data={chartData}
-          options={options}
-          width={size.width}
-          height={450} // 고정된 높이 전달 // 195 Line과 동일
+        <Line 
+          data={chartData} 
+          options={{
+            responsive: true,
+            maintainAspectRatio: false,
+            resizeDelay: 200,
+            animation: {
+              duration: 500
+            },
+            layout: {
+              padding: {
+                top: 10,
+                right: 25,
+                bottom: 10,
+                left: 10
+              }
+            },
+            plugins: {
+              title: {
+                display: true,
+                text: `${filter.barnType || ''} 센서 데이터 (${filter.snFarmId || ''})`,
+                font: {
+                  size: 16
+                },
+                padding: {
+                  top: 10,
+                  bottom: 20
+                }
+              },
+              legend: {
+                position: 'top',
+                labels: {
+                  boxWidth: 15,
+                  padding: 15
+                }
+              },
+              tooltip: {
+                mode: 'index',
+                intersect: false,
+                backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                titleColor: '#333',
+                bodyColor: '#666',
+                borderColor: '#ddd',
+                borderWidth: 1,
+                padding: 10,
+                boxWidth: 0,
+                usePointStyle: true
+              }
+            },
+            hover: {
+              mode: 'nearest',
+              intersect: false
+            },
+            scales: {
+              x: {
+                type: 'category',
+                grid: {
+                  display: false
+                },
+                ticks: {
+                  maxRotation: 45,
+                  minRotation: 0
+                },
+                title: {
+                  display: true,
+                  text: '측정 시간',
+                  padding: {top: 10, bottom: 0}
+                }
+              },
+              y: {
+                type: 'linear',
+                beginAtZero: false,
+                grid: {
+                  color: 'rgba(0, 0, 0, 0.05)'
+                },
+                title: {
+                  display: true,
+                  text: '측정값',
+                  padding: {top: 0, bottom: 10}
+                }
+              }
+            }
+          }} 
         />
       )}
     </div>

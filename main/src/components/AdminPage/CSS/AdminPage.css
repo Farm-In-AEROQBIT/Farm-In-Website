@@ -117,8 +117,18 @@ h2 {
 .crud-form {
   display: flex;
   flex-direction: column;
-  gap: 15px; /* 요소 간 간격 조정 */
+  gap: 10px;
+  padding: 20px;
+  background: #fff;
+  border: 1px solid #ccc;
 }
+
+.barn-checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
 
 .crud-form select,
 .crud-form input,

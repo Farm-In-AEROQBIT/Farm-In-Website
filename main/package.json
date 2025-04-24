@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "react-scripts start --host 118.42.54.88",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "eject": "react-scripts eject"
   },
@@ -22,8 +22,7 @@
     "react-modal": "^3.16.3",
     "react-router-dom": "^6.28.0",
     "react-scripts": "^5.0.1",
-    "web-vitals": "^4.2.4",
-    "webpack": "^4.47.0"
+    "web-vitals": "^4.2.4"
   },
   "browserslist": {
     "production": [
@@ -35,6 +34,6 @@
       "last 1 chrome version",
       "last 1 firefox version"
     ]
-  },
-  "proxy": "http://118.42.54.88:8080"
+  }
+  
 }

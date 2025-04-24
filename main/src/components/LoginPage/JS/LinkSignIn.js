@@ -14,10 +14,10 @@ const LinkSingIn = () => {
     return(
         <main>
             <div className="question">
-                아직 팜인 회원이 아니신가요?
+                {/* 아직 팜인 회원이 아니신가요? */}
             </div>
             <button className="create-account" onClick={onClickLink}>
-                계정 만들기
+                {/* 계정 만들기 */}
             </button>
         </main>
     ); 

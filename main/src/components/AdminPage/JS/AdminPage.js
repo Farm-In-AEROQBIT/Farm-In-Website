@@ -7,6 +7,7 @@ import FarmRegister from './FarmRegister';
 import FarmSearch from './FarmSearch';
 import FarmUpdate from './FarmUpdate';
 import FarmDelete from './FarmDelete';
+import SNFarmRegister from './SNFarmRegister'; 
 import '../CSS/AdminPage.css';
 
 const AdminPage = () => {
@@ -25,6 +26,8 @@ const AdminPage = () => {
         return <UserDelete />;
       case 'farmRegister':
         return <FarmRegister />;
+      case 'SNFarmRegister':
+        return <SNFarmRegister />;
       case 'farmSearch':
         return <FarmSearch />;
       case 'farmUpdate':
@@ -57,6 +60,7 @@ const AdminPage = () => {
             <h2>농장 관리</h2>
             <div className="crud-button-group">
               <button onClick={() => setActiveComponent('farmRegister')}>농장 등록</button>
+              <button onClick={() => setActiveComponent('SNFarmRegister')}>모뎀 등록</button>
               <button onClick={() => setActiveComponent('farmSearch')}>농장 조회</button>
               <button onClick={() => setActiveComponent('farmUpdate')}>농장 업데이트</button>
               <button onClick={() => setActiveComponent('farmDelete')}>농장 삭제</button>
