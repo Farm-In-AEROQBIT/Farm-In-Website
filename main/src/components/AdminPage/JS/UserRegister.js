@@ -14,7 +14,7 @@ const UserRegister = () => {
         username: userId,
         password: userPw,
         name,
-        phoneNumber,
+        phonenum: phoneNumber,
         email,
       });
       alert('유저 등록 완료');

@@ -20,28 +20,36 @@ const Dropdown = ({ onFilterChange, onSearch }) => {
   const [selectedSection, setSelectedSection] = useState(null);
   const [sensors, setSensors] = useState([]);
 
-  const [yearList, setYearList] = useState([]);
-  const [dayList, setDayList] = useState([]);
+  // 사용 가능한 날짜 관련 상태
+  const [availableYears, setAvailableYears] = useState([]);
+  const [availableMonths, setAvailableMonths] = useState([]);
+  const [availableDays, setAvailableDays] = useState([]);
+  
   const [selectedYear, setSelectedYear] = useState('');
   const [selectedMonth, setSelectedMonth] = useState('');
-  const [selectedWeek, setSelectedWeek] = useState('');
   const [selectedDay, setSelectedDay] = useState('');
   const [loading, setLoading] = useState(false);
 
-  // 날짜 목록 생성 (회원가입일 ~ 오늘까지)
+  // 기본 날짜 목록 생성 (백업용)
   useEffect(() => {
     const startYear = 2023;
     const thisYear = new Date().getFullYear();
-    const years = [];
+    const defaultYears = [];
     for (let y = startYear; y <= thisYear; y++) {
-      years.push(y);
+      defaultYears.push(y);
     }
-    setYearList(years);
-
-    // 일자
-    const days = Array.from({ length: 31 }, (_, i) => i + 1);
-    setDayList(days);
-  }, []);
+    
+    // 기본 연도 목록 설정 (데이터가 없는 경우 대비)
+    if (availableYears.length === 0) {
+      setAvailableYears(defaultYears);
+    }
+    
+    // 기본 일자 목록 설정 (데이터가 없는 경우 대비)
+    if (availableDays.length === 0) {
+      const defaultDays = Array.from({ length: 31 }, (_, i) => i + 1);
+      setAvailableDays(defaultDays);
+    }
+  }, [availableYears.length, availableDays.length]);
 
   // 농장 정보 가져오기
   useEffect(() => {
@@ -116,8 +124,11 @@ const Dropdown = ({ onFilterChange, onSearch }) => {
         const sensorsData = res.data.body || [];
         setSensors(sensorsData);
         
-        // 센서 데이터를 받으면 바로 필터 상태 업데이트 (중요 변경!)
+        // 센서 데이터를 받으면 바로 필터 상태 업데이트
         updateFilterState(section, sensorsData);
+        
+        // 받아온 센서 데이터를 분석하여 사용 가능한 날짜 추출
+        extractAvailableDatesFromSensorData(sensorsData);
       })
       .catch(error => {
         console.error('센서 정보 조회 오류:', error);
@@ -126,6 +137,126 @@ const Dropdown = ({ onFilterChange, onSearch }) => {
       .finally(() => {
         setLoading(false);
       });
+  };
+  
+  // 센서 데이터에서 사용 가능한 날짜 추출
+  const extractAvailableDatesFromSensorData = (sensorsData) => {
+    try {
+      console.log('센서 데이터에서 사용 가능한 날짜 추출 시작');
+      
+      // 기본값 설정
+      const startYear = 2023;
+      const thisYear = new Date().getFullYear();
+      const years = [];
+      for (let y = startYear; y <= thisYear; y++) {
+        years.push(y);
+      }
+
+      // 최소 및 최대 날짜 기록
+      let minDate = new Date();
+      let maxDate = new Date(2023, 0, 1); // 시작 기준일 (2023년 1월 1일)
+      let hasDateData = false;
+      
+      // 센서 데이터에서 날짜 정보 추출
+      if (sensorsData && sensorsData.length > 0) {
+        // 데이터 구조 확인
+        console.log('센서 데이터 첫 항목:', sensorsData[0]);
+        
+        // 데이터에서 날짜 필드 찾기 (createdAt, updatedAt, measureDate 등 가능성 있는 필드)
+        const dateFields = ['createdAt', 'updatedAt', 'measureDate', 'date', 'timestamp'];
+        
+        sensorsData.forEach(sensor => {
+          // 센서 데이터에서 날짜 정보 찾기
+          for (const field of dateFields) {
+            if (sensor[field]) {
+              const date = new Date(sensor[field]);
+              if (!isNaN(date.getTime())) {
+                // 유효한 날짜인 경우
+                if (date < minDate) minDate = new Date(date);
+                if (date > maxDate) maxDate = new Date(date);
+                hasDateData = true;
+              }
+            }
+          }
+          
+          // 중첩된 데이터 구조도 확인
+          if (sensor.data && Array.isArray(sensor.data)) {
+            sensor.data.forEach(item => {
+              for (const field of dateFields) {
+                if (item[field]) {
+                  const date = new Date(item[field]);
+                  if (!isNaN(date.getTime())) {
+                    // 유효한 날짜인 경우
+                    if (date < minDate) minDate = new Date(date);
+                    if (date > maxDate) maxDate = new Date(date);
+                    hasDateData = true;
+                  }
+                }
+              }
+            });
+          }
+        });
+      }
+      
+      // 최소/최대 날짜 로그 출력
+      if (hasDateData) {
+        console.log('데이터 날짜 범위:', minDate, '~', maxDate);
+        
+        // 데이터 시작 연도와 끝 연도 설정
+        const dataStartYear = minDate.getFullYear();
+        const dataEndYear = maxDate.getFullYear();
+        
+        // 데이터가 있는 연도 범위만 설정
+        const availableYearsFromData = [];
+        for (let y = dataStartYear; y <= dataEndYear; y++) {
+          availableYearsFromData.push(y);
+        }
+        
+        if (availableYearsFromData.length > 0) {
+          setAvailableYears(availableYearsFromData);
+          setSelectedYear(availableYearsFromData[availableYearsFromData.length - 1].toString()); // 가장 최신 연도 선택
+          
+          // 월도 설정
+          setAvailableMonths(Array.from({ length: 12 }, (_, i) => i + 1));
+          const latestMonth = maxDate.getMonth() + 1; // 0부터 시작하므로 +1
+          setSelectedMonth(latestMonth.toString());
+          
+          // 일 수 설정 (월에 따라 자동 설정됨)
+          const latestDay = maxDate.getDate();
+          setSelectedDay(latestDay.toString());
+        }
+      } else {
+        // 날짜 데이터가 없는 경우 기본값 설정
+        console.log('센서 데이터에서 날짜 정보를 찾을 수 없음, 기본값 사용');
+        setAvailableYears(years);
+        setAvailableMonths(Array.from({ length: 12 }, (_, i) => i + 1));
+        
+        // 현재 날짜 설정
+        const now = new Date();
+        setSelectedYear(now.getFullYear().toString());
+        setSelectedMonth((now.getMonth() + 1).toString());
+        setSelectedDay(now.getDate().toString());
+      }
+    } catch (error) {
+      console.error('날짜 데이터 추출 중 오류 발생:', error);
+      
+      // 오류 발생 시 기본값 설정
+      const startYear = 2023;
+      const thisYear = new Date().getFullYear();
+      const years = [];
+      for (let y = startYear; y <= thisYear; y++) {
+        years.push(y);
+      }
+      
+      setAvailableYears(years);
+      setAvailableMonths(Array.from({ length: 12 }, (_, i) => i + 1));
+      
+      // 현재 날짜 설정
+      const now = new Date();
+      setSelectedYear(now.getFullYear().toString());
+      setSelectedMonth((now.getMonth() + 1).toString());
+      setSelectedDay(now.getDate().toString());
+    }
   };
 
   // 돈사 이름을 한글로 변환하는 함수
@@ -136,7 +267,7 @@ const Dropdown = ({ onFilterChange, onSearch }) => {
     return sectionTypeToKorean[section.type] || section.name;
   };
 
-  // 필터 상태 업데이트 함수 (새로 추가)
+  // 필터 상태 업데이트 함수
   const updateFilterState = useCallback((section, sensorsData) => {
     if (!section) return;
     
@@ -151,7 +282,6 @@ const Dropdown = ({ onFilterChange, onSearch }) => {
       snFarmId: section.snFarmId || section.sn_farm_id,
       year: selectedYear,
       month: selectedMonth,
-      week: selectedWeek,
       day: selectedDay,
       showGraph: true // 그래프 표시 플래그 설정
     };
@@ -162,12 +292,11 @@ const Dropdown = ({ onFilterChange, onSearch }) => {
     selectedFarm, 
     selectedYear, 
     selectedMonth, 
-    selectedWeek, 
     selectedDay, 
     onFilterChange
   ]);
 
-  // handleSearch 함수 - 로깅 추가
+  // 검색 실행 함수
   const handleSearch = useCallback(() => {
     console.log("handleSearch 호출됨", selectedSection);
     if (!selectedSection) return;
@@ -191,7 +320,6 @@ const Dropdown = ({ onFilterChange, onSearch }) => {
       snFarmId: selectedSection.snFarmId || selectedSection.sn_farm_id,
       year: selectedYear,
       month: selectedMonth,
-      week: selectedWeek,
       day: selectedDay,
       showGraph: true // 그래프 표시 플래그 설정
     });
@@ -201,17 +329,88 @@ const Dropdown = ({ onFilterChange, onSearch }) => {
     sensors, 
     selectedYear, 
     selectedMonth, 
-    selectedWeek, 
     selectedDay, 
     onFilterChange
   ]);
 
-  // 날짜 선택 시 필터 업데이트 (새로 추가)
+  // 센서 데이터로부터 사용 가능한 날짜 여부 확인
+  const checkDateHasData = useCallback((year, month, day) => {
+    // 날짜 유효성 기본 검사
+    const selectedDate = new Date(year, month - 1, day);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    
+    // 미래 날짜는 데이터가 없음
+    if (selectedDate > today) {
+      return false;
+    }
+    
+    // 센서 데이터가 없는 경우 현재 날짜까지만 유효
+    if (!sensors || sensors.length === 0) {
+      // 2023년 이전 데이터는 없다고 가정
+      if (year < 2023) {
+        return false;
+      }
+      
+      // 오늘 이전 날짜는 모두 데이터가 있다고 가정
+      return true;
+    }
+    
+    // 이 부분은 실제 센서 데이터의 구조에 따라 맞춤 구현 필요
+    // 여기서는 간단히 올해 데이터만 있다고 가정
+    const currentYear = new Date().getFullYear();
+    
+    // 센서 데이터에 해당 날짜가 포함되어 있는지 확인하는 코드를 여기에 추가
+    // 현재는 단순히 2023년 이후 현재까지의 날짜는 데이터가 있다고 가정
+    return year >= 2023 && year <= currentYear;
+  }, [sensors]);
+  
+  // 월 선택 변경 시 일 수 조정
   useEffect(() => {
-    if (selectedSection && sensors.length > 0) {
+    if (!selectedYear || !selectedMonth) return;
+    
+    // 선택한 월에 맞는 일 수 계산
+    let daysInMonth = 31;
+    
+    // 월별 일수 계산
+    if (selectedMonth === '4' || selectedMonth === '6' || 
+        selectedMonth === '9' || selectedMonth === '11') {
+      daysInMonth = 30;
+    } else if (selectedMonth === '2') {
+      // 윤년 계산
+      const year = parseInt(selectedYear);
+      if ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0) {
+        daysInMonth = 29;
+      } else {
+        daysInMonth = 28;
+      }
+    }
+    
+    // 해당 월에 맞는 일 수 설정
+    setAvailableDays(Array.from({ length: daysInMonth }, (_, i) => i + 1));
+    
+    // 선택된 일이 해당 월의 최대 일수보다 크면 조정
+    if (selectedDay && parseInt(selectedDay) > daysInMonth) {
+      setSelectedDay('1');
+    }
+  }, [selectedYear, selectedMonth, selectedDay]);
+  
+  // 날짜 선택 시 필터 업데이트
+  useEffect(() => {
+    if (selectedSection && sensors.length > 0 && 
+        selectedYear && selectedMonth && selectedDay) {
+      
+      // 필터 업데이트
       updateFilterState(selectedSection, sensors);
     }
-  }, [selectedYear, selectedMonth, selectedWeek, selectedDay, updateFilterState, selectedSection, sensors]);
+  }, [
+    selectedYear, 
+    selectedMonth, 
+    selectedDay, 
+    updateFilterState, 
+    selectedSection, 
+    sensors
+  ]);
 
   // handleSearch 함수 전달
   useEffect(() => {
@@ -277,7 +476,7 @@ const Dropdown = ({ onFilterChange, onSearch }) => {
         </div>
       </div>
 
-      {/* 센서 정보 표시 (드롭다운 대신 텍스트로 표시) */}
+      {/* 센서 정보 표시 */}
       <div className="dropdown-block">
         <label>센서 정보</label>
         <div className="sensor-info">
@@ -291,41 +490,79 @@ const Dropdown = ({ onFilterChange, onSearch }) => {
         </div>
       </div>
 
-      {/* 시간 선택 영역 */}
+      {/* 시간 선택 영역 - 주차 드롭다운 제거 및 월에 따른 일 수 조정 */}
       <div className="time-grid">
         <div className="time-column">
           <label>년도</label>
-          <select value={selectedYear} onChange={e => setSelectedYear(e.target.value)}>
+          <select 
+            value={selectedYear} 
+            onChange={e => setSelectedYear(e.target.value)}
+            disabled={!selectedSection}
+          >
             <option value="">년도 선택</option>
-            {yearList.map(year => (
-              <option key={`year-${year}`} value={year}>{year}</option>
-            ))}
-          </select>
-
-          <label>주차</label>
-          <select value={selectedWeek} onChange={e => setSelectedWeek(e.target.value)}>
-            <option value="">주차 선택</option>
-            {[1,2,3,4,5].map(week => (
-              <option key={`week-${week}`} value={week}>{week}주차</option>
+            {availableYears.map(year => (
+              <option 
+                key={`year-${year}`} 
+                value={year}
+                disabled={!checkDateHasData(year, 1, 1)} // 해당 연도에 데이터가 없으면 비활성화
+              >
+                {year}
+              </option>
             ))}
           </select>
         </div>
 
         <div className="time-column">
           <label>월</label>
-          <select value={selectedMonth} onChange={e => setSelectedMonth(e.target.value)}>
+          <select 
+            value={selectedMonth} 
+            onChange={e => setSelectedMonth(e.target.value)}
+            disabled={!selectedYear}
+          >
             <option value="">월 선택</option>
-            {Array.from({ length: 12 }, (_, i) => i + 1).map(month => (
-              <option key={`month-${month}`} value={month}>{month}월</option>
-            ))}
+            {availableMonths.map(month => {
+              const hasData = checkDateHasData(
+                parseInt(selectedYear), 
+                month, 
+                1
+              );
+              return (
+                <option 
+                  key={`month-${month}`} 
+                  value={month}
+                  disabled={!hasData} // 해당 월에 데이터가 없으면 비활성화
+                >
+                  {month}월
+                </option>
+              );
+            })}
           </select>
+        </div>
 
+        <div className="time-column">
           <label>일</label>
-          <select value={selectedDay} onChange={e => setSelectedDay(e.target.value)}>
+          <select 
+            value={selectedDay} 
+            onChange={e => setSelectedDay(e.target.value)}
+            disabled={!selectedMonth}
+          >
             <option value="">일 선택</option>
-            {dayList.map(day => (
-              <option key={`day-${day}`} value={day}>{day}일</option>
-            ))}
+            {availableDays.map(day => {
+              const hasData = checkDateHasData(
+                parseInt(selectedYear), 
+                parseInt(selectedMonth), 
+                day
+              );
+              return (
+                <option 
+                  key={`day-${day}`} 
+                  value={day}
+                  disabled={!hasData} // 해당 일에 데이터가 없으면 비활성화
+                >
+                  {day}일
+                </option>
+              );
+            })}
           </select>
         </div>
       </div>
